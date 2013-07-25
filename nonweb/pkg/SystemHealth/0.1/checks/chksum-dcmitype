@@ -1,0 +1,14 @@
+#! /bin/sh
+
+echo "Check if DCMIType schema has not changed..."
+
+URL="http://dublincore.org/schemas/xmls/qdc/dcmitype.xsd"
+CHKSUM="20feaf64ffd64c0414006da9de74ea0f"
+
+NEW_CHKSUM=$(curl -s "$URL" | md5sum | cut -d' ' -f 1)
+
+if [ "$NEW_CHKSUM" = "$CHKSUM" ]; then
+    echo PASS
+else
+    echo FAIL
+fi

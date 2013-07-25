@@ -1,0 +1,28 @@
+#! /bin/bash
+
+case $0 in
+    /*) thisdir=$(dirname $0) ;;
+    *)  thisdir=$(pwd)/$(dirname $0) ;;
+esac
+
+#cols=$(stty size)
+#cols=${cols##* }
+cols=80
+
+while [ $# -gt 0 ]; do
+    find $thisdir/$1 -type l | sort | while read a; do
+        $a | while true; do
+            read a
+            [ -z "$a" ] && break
+            echo -n $a
+            read b
+            n=$(($cols - ${#a} - ${#b} - 1))
+            while [ $n -gt 0 ]; do
+                echo -n " "
+                n=$(($n - 1))
+            done
+            echo $b
+        done
+    done
+    shift
+done

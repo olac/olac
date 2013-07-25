@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="file:../lib/marc-filter.rnc" type="compact"?>
+<marc-filter>
+   <header xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <dc:title>MARC filter for the NAA crosswalk</dc:title>
+      <dc:contributor>Joan Spanne</dc:contributor>
+      <dc:date>2009-04-24</dc:date>
+      <dc:description>This filter for the NAA record set mostly serves
+         to remove unwanted image records, but
+         does use the select stage to explicitly select desired records.</dc:description>
+   </header>
+   <reject-rules>
+      <test>
+         <data-field test="contains" tag="245" code="">
+            <text>Photograph</text>
+            <text>photograph</text>
+            <text>Engraving</text>
+            <text>engraving</text>
+         </data-field>
+      </test>
+      <test>
+         <data-field test="contains" tag="596" code="">
+            <text>Photograph</text>
+         </data-field>
+      </test>
+      <test>
+         <data-field test="contains" tag="655" code="">
+            <text>Photograph</text>
+         </data-field>
+      </test>
+      <test>
+         <data-field test="contains" tag="673" code="">
+            <text>Photograph</text>
+            <text>photograph</text>
+         </data-field>
+      </test>
+      <test>
+         <control-field tag="001" test="equals">
+            <text>9</text>
+            <text>10</text>
+            <text>11</text>
+            <text>17</text>
+            <text>21</text>
+            <text>22</text>
+            <text>36</text>
+            <text>37</text>
+            <text>45</text>
+            <text>46</text>
+            <text>65</text>
+            <text>75</text>
+            <text>135</text>
+            <text>151</text>
+            <text>345</text>
+            <text>494</text>
+            <text>495</text>
+            <text>517</text>
+            <text>520</text>
+            <text>549</text>
+            <text>560</text>
+            <text>565</text>
+            <text>567</text>
+            <text>572</text>
+            <text>575</text>
+            <text>713</text>
+            <text>888</text>
+            <text>889</text>
+            <text>898</text>
+            <text>922</text>
+            <text>923</text>
+            <text>924</text>
+            <text>925</text>
+            <text>926</text>
+            <text>927</text>
+            <text>928</text>
+            <text>929</text>
+            <text>930</text>
+            <text>931</text>
+            <text>932</text>
+            <text>933</text>
+            <text>934</text>
+            <text>935</text>
+            <text>936</text>
+            <text>1104</text>
+            <text>1128</text>
+            <text>1220</text>
+            <text>1231</text>
+            <text>1235</text>
+            <text>1240</text>
+            <text>1248</text>
+            <text>1441</text>
+            <text>1442</text>
+            <text>1458</text>
+            <text>1460</text>
+            <text>281449</text>
+         </control-field>
+      </test>
+   </reject-rules>
+   <retain-rules>
+      <!--
+         The NAA record set contains a 546 Language Note or a 695 locally defined subject term
+         noting language or ethnolinguistic group information for most desired records.
+         The set also contains numerous graphics of little or no interest. However, they
+         do not use the leader to indicate record type.
+      -->
+      <test>
+         <data-field test="exists" tag="546" code=""/>
+      </test>
+      <test>
+         <data-field test="exists" tag="695" code=""/>
+      </test>
+      <test>
+         <data-field test="contains" tag="24x" code="">
+            <text>Dictionar</text>
+            <text>dictionar</text>
+            <text>Lexic</text>
+            <text>lexic</text>
+            <text>Language</text>
+            <text>language</text>
+            <text>Vocabular</text>
+            <text>vocabular</text>
+            <text>Linguistic</text>
+            <text>linguistic</text>
+            <text>Gramma</text>
+            <text>gramma</text>
+            <text>Phonolog</text>
+            <text>phonolog</text>
+         </data-field>
+      </test>
+      <test>
+         <data-field test="contains" tag="520" code="">
+            <text>Dictionar</text>
+            <text>dictionar</text>
+            <text>Lexic</text>
+            <text>lexic</text>
+            <text>Language</text>
+            <text>language</text>
+            <text>Vocabular</text>
+            <text>vocabular</text>
+            <text>Linguistic</text>
+            <text>linguistic</text>
+            <text>Gramma</text>
+            <text>gramma</text>
+            <text>Phonolog</text>
+            <text>phonolog</text>
+         </data-field>
+      </test>
+   </retain-rules>
+
+</marc-filter>

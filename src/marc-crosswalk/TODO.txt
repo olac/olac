@@ -1,0 +1,23 @@
+Actions:
+
+- add last section in /src/olac/web/NOTE/marc.html : debugging the crosswalk
+- fill in the content for the file above
+
+X - make --debug option leave intermediate files in place for inspection
+X - reistate --inverse ability through the --debug which will allow inverse mode to be output along side the regular output
+X - add a --stop-after= (olacfilter) | marcfilter | crosswalk | enrichment
+
+X - Gary will work on redoing the marc filter
+    
+X - finish implementing the classifier stage of the pipeline
+
+testing priority:
+NAA data - does it successfully enrich records that have neither resource type or subject language
+
+
+4/23 changes TODO:
+
+- subject language classifier should not incorporate dc:discription if it has an xsi:type of URI.  (see email for details)
+- subject language classifier returns "high score" as answer?  what does this mean?
+- binary type classifier has horrible results.  what's going on?
+- are we using an old multi-type classifier?

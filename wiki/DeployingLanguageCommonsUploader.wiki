@@ -1,0 +1,121 @@
+#summary Document how LanguageCommons Uploader was deployed on the current OLAC server.
+
+= Introduction =
+
+This wiki page documents how the LanguageCommons Uploader, written by Alistair Roche, was deployed on the current OLAC web server as of May 2011. Additional information non-existent in the software documentation is included. That will help reduce learning curve for future deployment on a different server.
+
+
+= Prerequisites =
+
+Install Django 1.2.5.
+Install Django uni_form.
+Install Django south.
+
+(Apache, MySQL and mod_wsgi were already available on the OLAC server.)
+
+
+= Install LanguageCommons Uploader at non-root URL =
+
+Download LanguageCommons Uploader from the olac svn repository. The latest version can be downloaded from [https://github.com/atroche/language-commons here].
+
+{{{
+mkdir /olac/languagecommons
+cd /olac/languagecommons
+wget http://olac.googlecode.com/svn/src/language-commons-uploader.tgz
+}}}
+
+Unpack the package and rename the unpackaged directory.
+At the top level of the directory, you should see files like README.markdown, settings.py and urls.py.
+
+{{{
+tar xf language-commons-uploader.tgz
+mv language-commons django_deploy
+rm language-commons-uploader.tgz
+}}}
+
+Create a directory called apache.
+
+{{{
+cd django_deploy
+mkdir apache
+}}}
+
+Inside the apache directory, create a file called django.wsgi.
+
+{{{
+import os
+import sys
+import olac
+
+os.environ['PYTHON_EGG_CACHE'] = olac.olacvar('python/egg_cache/wsgi')
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+
+sys.path.append('/olac/languagecommons/django_deploy')
+import django.core.handlers.wsgi
+application = django.core.handlers.wsgi.WSGIHandler()
+}}}
+
+Edit settings.py to edit database, timezone settings, plus 
+the SECRET_KEY. Change ROOT_URLCONF's value to "urls".
+
+Create uploader/secret.py file as explained in README.markdown. This file should contain two variables as follows:
+
+{{{
+accesskey = '...'
+secretkey = '...'
+}}}
+
+Edit uploader/management/commands/upload_items.py as it has bugs. Remove the following line:
+
+{{{
+from commons.settings import MEDIA_ROOT, PROJECT_DIR
+}}}
+
+and add the following line:
+
+{{{
+from django.conf import settings
+}}}
+
+Then, for each instance of MEDIA_ROOT and PROJECT_DIR, prefix them with "settings.", e.g.
+
+{{{
+MEDIA_ROOT --> settings.MEDIA_ROOT
+PROJECT_DIR --> settings.PROJECT_DIR
+}}}
+
+
+For each (broken) links in the media/admin directory, find the actual
+file under /usr/lib/python2.5/site-packages/django/contrib/admin/media.
+Replace the links with the actual files.
+
+Create an uploads directory, where uploaded items are saved.
+
+{{{
+cd /olac/languagecommons/django/media
+mkdir uploads
+chgrp www-data uploads
+chmod g+w uploads
+}}}
+
+Edit templates/sr.xml file and update the baseURL.
+
+= Configure MySQL =
+
+= Configure Apache =
+
+Set up a virtual host and add the following lines to the config file.
+
+{{{
+Alias /media/ /olac/languagecommons/django/media/
+Alias /admin_media/ /olac/languagecommons/django/media/admin/
+WSGIScriptAlias / /olac/languagecommons/django/apache/django.wsgi
+}}}
+
+
+= Cron job =
+Add a cron job checks newly accepted items and uploads them to archive.org. For example,
+
+{{{
+*/15 * * * * (cd /olac/languagecommons/django_deploy; ./manage.py upload_items)
+}}}

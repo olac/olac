@@ -1,0 +1,35 @@
+#! /bin/sh
+
+echo "Check registration directories..."
+
+is_writable() {
+	stat -c "%U %G %A" $1 | {
+		read a b c
+		if [ "$a" = "www-data" -a \
+                     $(expr "$c" : '..\(.\)') = 'w' ]; then
+			return 0
+		elif [ "$b" = "www-data" -a \
+                       $(expr "$c" : '.....\(.\)') = 'w' ]; then
+			return 0
+		else
+			return 1
+		fi
+	}
+}
+
+if [ ! -d $(olacvar docroot)/register/tmp ]; then
+        echo FAIL
+elif ! is_writable $(olacvar docroot)/register/tmp; then
+        echo FAIL
+elif [ ! -d $(olacvar docroot)/$(olacvar registration/upload_area) ]; then
+	echo FAIL
+elif ! is_writable $(olacvar docroot)/$(olacvar registration/upload_area); then
+	echo FAIL
+elif [ ! -d $(olacvar docroot)/$(olacvar registration/hosting_area) ]; then
+	echo FAIL
+elif ! is_writable $(olacvar docroot)/$(olacvar registration/hosting_area); then
+	echo FAIL
+else
+	echo PASS
+fi
+

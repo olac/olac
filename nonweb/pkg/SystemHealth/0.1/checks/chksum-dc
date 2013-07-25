@@ -1,0 +1,14 @@
+#! /bin/sh
+
+echo "Check if DC schema has not changed..."
+
+URL="http://dublincore.org/schemas/xmls/qdc/dc.xsd"
+CHKSUM="7d469a2eac18d58ab99e26d1cfe5079e"
+
+NEW_CHKSUM=$(curl -s "$URL" | md5sum | cut -d' ' -f 1)
+
+if [ "$NEW_CHKSUM" = "$CHKSUM" ]; then
+    echo PASS
+else
+    echo FAIL
+fi

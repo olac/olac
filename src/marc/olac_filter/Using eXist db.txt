@@ -1,0 +1,83 @@
+
+NOTES ON USING EXIST XMLDB with our reulsts
+
+G. Simons
+7 July 2009
+
+
+SETTING UP EXIST
+----------------
+
+1. The eXist installer is going to ask for the root folder of a JDK installation.  If you don't find one on your machine (e.g. in Program Files/Jave/, then install the latest JDK from:
+
+    http://java.sun.com/javase/downloads/index.jsp
+
+2. Install eXist from http://exist-db.org/download.html.  I installed eXist-setup-1.2.6-rev9165.exe on my Vista machine.
+
+3. Start the application by double-clicking the "eXist Database Startup" icon on the desktop.
+
+4. Go to the home page of the eXist application to verify that it is installed and running:
+
+   http://localhost:8080/exist/
+
+5. To further test the setup, click on "Admin" in the Administration section of the navigation menu on the left. Log in as "admin" with the password you set up. 
+
+6. Click on "Examples Setup" in the left-side menu. Then click on the "Import Example Data" to load the supplied sample data into the database.
+
+7. Now click on "XQuery Sandbox" in the Examples section of hte left-side menu.  You can now play with the sample data to see examples of XQuery at work.
+
+
+
+SETTING UP OXYGEN
+-----------------
+
+1. Launch <oXygen/> XML Editor.
+
+2. Configure it to work with eXist by pulling up Options/ Preferences / Data Sources and following the instructions on this page to create the data source. Scroll down to "How to configure an eXist datasource":
+
+   http://www.oxygenxml.com/doc/ug-oxygen/native-xml-database-support.html
+
+3. Then follow the instructions on the follwing page to create a connection using that data source:
+
+   http://www.oxygenxml.com/doc/ug-oxygen/configure-exist-connection.html
+
+I replaced "<host>" with "localhost" in the URI, and used "admin" as the user.
+
+4. To test your configuration, open Perspective / Show View / Database Explorer. It should show the root node for the eXist database. Click on the "+" control to expand nodes.  If all is working, you will see the collections of sample data that were just loaded. Keep clicking +'s until you get to actual files. Double-click on a file name to load that file into the editor.  You are supposed to be able to edit and save and thereby update the database.
+
+N.B. This screen movie helped when I was trying to figure out how eXist works in oXygen:
+
+   http://www.oxygenxml.com/demo/eXist/eXist.html
+
+
+
+LOADING DATA
+------------
+
+1. Create a collection for OLAC data: In the Database Explorer of Oxygen, right-click on the /db root node. Choose "Add collection..." and give it a name like "olac".
+
+2. Add a resource to the collection:  Right-click on the new "olac" node and choose "Add resource...".  This opens a file browser, so the XML file that you want to add must be on your local computer.
+
+ 
+Alternatively,
+
+3. Double-click the "eXist client shell" shortcut on the desktop, or launch the "Webstart Client" from http://localhost:8080/exist/ to run the database administration client. 
+
+4. Use the third toolbar button to create a new collection (e.g. olac) and the fourth to store a new document into it (e.g. an OLAC static respository).
+
+
+BEWARE: Even though the configuration settings are for validation mode-"no" (which should accepted any well-formed data regardless of validity), it is not behaving that way.  I was getting failure to load an OLAC repository due to the extra @from attributes. The symptom was a non-helpful "networking error".  I found the real error message about validation failure by looking in exist\webapps\WEB-INF\logs\exist.log.
+
+WORKAROUND: Removing the schemaLocation attribute from the root element solved the problem.  However, not immediately--it kept complaining of the validation error even after removing the schemaLocation information. Thus there appears to be some file caching. I had to stop the exist server and restart it, and then it worked. 
+
+
+QUERYING DATA
+-------------
+
+1. Open the xquery document in <oXygen/> XML Editor (for instance, src/marc/olac_filter/repo-stats.xquery).
+
+2. Click the "Apply Tranformation Scenario" button in the toolbar.  The first time it will pop up the Configure Transformation dialog. Click on "Execute XQuery" to select it, then click Edit. In the next dialog, click the drop-down list for Transfomer and choose "eXist" from the list (or whatever you named your data connection). Then click OK.
+
+3. Now whenever you cklick the Transform button in the toolbar, it will run the XQuery.  In order to run the query on a different repository, change the name of the repository referenced in the doc() function in the first line after the namespace declarations.
+
+

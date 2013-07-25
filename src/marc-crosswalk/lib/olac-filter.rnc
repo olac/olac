@@ -1,0 +1,105 @@
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+namespace dc = "http://purl.org/dc/elements/1.1/"
+datatypes xsd = "http://www.w3.org/2001/XMLSchema-datatypes"
+
+# Abstract syntax for specifying a filter on an OLAC repository
+# G. Simons, 2 July 2009
+# Last updated: 10 June 2011
+
+grammar {
+
+# The rules are applied in the order that they are listed.
+# The first rule to match a record is the one that is followed.
+start = element olac-filter {
+   header,
+   (reject-rule | retain-rule)*, 
+   (else-reject | else-retain) }
+
+# The header gives the metadata for the filter definition itself
+header = 
+   element header { dc-title, dc-contributor, dc-date, dc-description }
+   
+dc-title =
+    element dc:title {text}
+    
+dc-contributor =
+    element dc:contributor {text}
+    
+dc-date =
+    element dc:date  {text}
+    
+dc-description =
+    element dc:description  {text}
+    
+   # Something that must be included within the header is all the 
+   # information needed to construct the provenance element that
+   # will be added in the records that go through the crosswalk
+
+# Any record that matches a reject-rule is summarily rejected; 
+# the rule is the AND of the embedded tests
+reject-rule = 
+   element reject-rule { 
+      attribute name { xsd:string },
+      (oai-identifier | dc-element)+}
+      
+# Any record that matches a 
+# retain-rule passes through the filter to the output;
+# a rule is the AND of the embedded tests
+retain-rule = 
+   element retain-rule { 
+      attribute name { xsd:string },
+      dc-element+}
+
+# The last rule is one or the other of the following:
+# Else-retain: every surviving record is retained
+else-retain = 
+   element else-retain { empty }
+# Else-reject: every surviving record is rejected
+else-reject = 
+   element else-reject { empty }
+   
+
+
+# A test on the contents of the oai:identifier element
+oai-identifier = element oai-identifier {
+   content
+  } 
+    
+ # A test on the contents of a named DC element
+dc-element = element dc-element {
+   # The tag must include the namespace prefix
+   attribute tag { text },
+   (attribute negate {"yes"} | attribute occursMoreThan {xsd:int} )?,
+   # If none of type, code, or content is present, it is a test for the
+   # mere presence of the element
+   type?, code?, content?
+  } 
+  
+# A test on the presence or the value of xsi:type
+type = element type {
+   attribute test { "exists" | "equals" | "contains" | "starts-with"  },
+   attribute negate {"yes"}?,
+   text-value*
+  } 
+  
+# A test on the presence or the value of olac:code
+code = element code {
+   attribute test { "exists" | "equals" | "contains" | "starts-with"  },
+   attribute negate {"yes"}?,
+   text-value*
+  } 
+  
+# A test on the presence or the value of element content
+content = element content {
+   attribute test { "exists" | "equals" | "contains" | "starts-with"  },
+   attribute negate {"yes"}?,
+   text-value*
+  } 
+  
+# The text element holds a value to be tested against. The element may
+# repeat within in a given test in which case the test is an OR over all 
+# specified text values.
+text-value =
+     element text { text }
+  
+}
