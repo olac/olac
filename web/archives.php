@@ -27,7 +27,7 @@ function get_archive_count()
     echo "<p>" . $DB->get_error_message() . "</p>\n";
     echo "<p>" . $DB->get_error_sql() . "</p>\n";
   }
-  return $tab[0][size];
+  return $tab[0]['size'];
 }
 
 function table_sort($row1, $row2)
@@ -66,26 +66,19 @@ function get_archive_table()
 
   usort($tab, "table_sort");
   if ($tab) foreach ($tab as $row) {
-    $x[archive] = $row[RepositoryName];
-    $x[institution] = $row[Institution];
-    $x[location] = $row[ShortLocation];
-    $x[detail] = "<a class=arch href=\"/archive/$row[RepositoryIdentifier]\">MORE<br>DETAILS</a>";
-    #$x[report] = "<a class=arch href=\"tools/reports/archiveReportCard.php?archive=$row[Archive_ID]\">REPORT<br>CARD</a>";
-    $x[report] = "<a class=arch href=\"/metrics/$row[RepositoryIdentifier]\">METRICS</a>";
+    $x['archive'] = $row['RepositoryName'];
+    $x['institution'] = $row['Institution'];
+    $x['location'] = $row['ShortLocation'];
+    $x['detail'] = "<a class=arch href=\"/archive/$row[RepositoryIdentifier]\">MORE<br>DETAILS</a>";
+    $x['report'] = "<a class=arch href=\"/metrics/$row[RepositoryIdentifier]\">METRICS</a>";
 
-    $s = preg_replace('@^http://@', '', $row[BaseURL]);
-    #$s = preg_replace('@/@', '_', $s) . ".html";
-
-    #if (preg_match('<td>', @join('',file('/ldc/web/language-archives/tools/eth15filter/'.$s))))
-    #    $x[iso639] = "<a class=arch href=\"tools/eth15filter/$s\"><font color=red><b>ISO639<br>REPORT</b></font></a>";
-    #else
-    #    $x[iso639] = "ISO639<br>REPORT";
+    $s = preg_replace('@^http://@', '', $row['BaseURL']);
 
     if ($row["Sample"])
         $x["sample"] = "<a class=arch href=\"/sample/$row[RepositoryIdentifier]\">SAMPLE RECORD</a>";
     else
         $x["sample"] = "<span class=arch>N/A</span>";
-    $x["last_harvested"] = $row[LastHarvested];
+    $x["last_harvested"] = $row['LastHarvested'];
     $result[] = $x;
   }
   return $result;
@@ -199,7 +192,7 @@ if ($tab) {
       echo "<tr>";
       echo "<td class=$rowclass><div class=name>$row[archive]</div>";
       echo "<div class=loc>";
-      if ($row[institution]) {
+      if ($row['institution']) {
         echo "$row[institution], ";
       }
       echo "$row[location]</div></td>";

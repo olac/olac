@@ -22,6 +22,8 @@
 #   2002-??-??  Steven Bird wrote it originally
 ######################################################################
 
+error_reporting(E_ALL ^ E_NOTICE);
+
 require_once("lib/php/OLACDB.php");
 $DB = new OLACDB();
 $DB->sql("set names 'utf8'");
@@ -142,7 +144,7 @@ function old_meta_tag_formatting($tab)
     }
     
     $meta_content = $value;
-    $meta_name = "DC." . ereg_replace(" .*", "", $meta_name);
+    $meta_name = "DC." . preg_replace("/ .*/", "", $meta_name);
     if ($meta_name == "DC.Description") $meta_name="Description";
     $meta .= "<meta name=\"$meta_name\" content=\"$meta_content\">\n";
     
@@ -574,9 +576,10 @@ foreach ($html_tab as $record) {
 
   # search term highlighting
   foreach( $queryTokens as $tok ) {
-    $tok = str_replace("(","\(",$tok);
+    $tok = str_replace("(", "\(", $tok);
+    $tok = str_replace("/", "\/", $tok);
     # Case insensitive matching of query keywords
-    $value = eregi_replace($tok, '<em style="background:yellow">\\0</em>', $value );
+    $value = preg_replace("/$tok/i", '<em style="background:yellow">\\0</em>', $value );
   }
 
   $body1 .= "<td></td><td>$value</td></tr>\n";

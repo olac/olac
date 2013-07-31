@@ -9,6 +9,8 @@
 #
 ######################################################################
 
+error_reporting(E_ALL ^ E_NOTICE);
+
 require_once("lib/php/OLACDB.php");
 $DB = new OLACDB();
 ?>
@@ -76,7 +78,7 @@ function archives($archiveid)
     return $output;
 }
 
-$archiveid = $_GET[archive];
+$archiveid = $_GET['archive'];
 if (!$archiveid) {
 	$arr = explode('?', $_SERVER["REQUEST_URI"]);
 	$archiveid = basename($arr[0]);

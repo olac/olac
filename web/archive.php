@@ -3,6 +3,8 @@
 # Synopsis: Display the archive informaion from the olac database.
 #
 
+error_reporting(E_ALL ^ E_NOTICE);
+
 require_once("lib/php/OLACDB.php");
 $DB = new OLACDB();
 
@@ -41,48 +43,48 @@ function get_archive_info($id)
     $archivetype = $tab5[0]['type'];
     $r = $tab[0];
 
-    $o[Size] = $tab1[0][size];
-    $o["Repository Name"] = $r[RepositoryName];
-    $i = $r[Institution];
-    $iu = $r[InstitutionURL];
+    $o['Size'] = $tab1[0]['size'];
+    $o["Repository Name"] = $r['RepositoryName'];
+    $i = $r['Institution'];
+    $iu = $r['InstitutionURL'];
     if ($i) {
         if ($iu)
-            $o[Institution] = "<a href=\"$iu\">$i</a>";
+            $o['Institution'] = "<a href=\"$iu\">$i</a>";
         else
-            $o[Institution] = $i;
+            $o['Institution'] = $i;
     } elseif ($iu)
-       $o[Institution] = "<a href=\"$iu\">$iu</a>";
+       $o['Institution'] = "<a href=\"$iu\">$iu</a>";
     else
-        $o[Institution] = "";
-    $o[ArchiveURL] = "<a href=\"$r[ArchiveURL]\">$r[ArchiveURL]</a>";
-    $c = $r[Curator];
-    $ce = str_replace('mailto:', '', $r[CuratorEmail]);
+        $o['Institution'] = "";
+    $o['ArchiveURL'] = "<a href=\"$r[ArchiveURL]\">$r[ArchiveURL]</a>";
+    $c = $r['Curator'];
+    $ce = str_replace('mailto:', '', $r['CuratorEmail']);
     if ($c) {
         if ($ce)
-            $o[Curator] = "<a href=\"mailto:$ce\">$c</a>";
+            $o['Curator'] = "<a href=\"mailto:$ce\">$c</a>";
         else
-            $o[Curator] = $c;
+            $o['Curator'] = $c;
     } elseif ($ce)
-       $o[Curator] = "<a href=\"mailto:$ce\">$ce</a>";
+       $o['Curator'] = "<a href=\"mailto:$ce\">$ce</a>";
     else
-        $o[Curator] = "";
-    $o[Location] = $r[Location];
-    $o['Short Location'] = $r[ShortLocation];
-    $o[Synopsis] = $r[Synopsis];
-    $o[Access] = $r[Access];
-    $o["Submission Policy"] = $r[ArchivalSubmissionPolicy];
-    $r[AdminEmail] = str_replace('mailto:', '', $r[AdminEmail]);
-    $o[Administrator] = "<a href=\"mailto:$r[AdminEmail]\">$r[AdminEmail]</a>";
+        $o['Curator'] = "";
+    $o['Location'] = $r['Location'];
+    $o['Short Location'] = $r['ShortLocation'];
+    $o['Synopsis'] = $r['Synopsis'];
+    $o['Access'] = $r['Access'];
+    $o["Submission Policy"] = $r['ArchivalSubmissionPolicy'];
+    $r['AdminEmail'] = str_replace('mailto:', '', $r['AdminEmail']);
+    $o['Administrator'] = "<a href=\"mailto:$r[AdminEmail]\">$r[AdminEmail]</a>";
     if ($tab3) {
         $participant_arr = array();
         foreach ($tab3 as $p) {
             $participant_arr[] = "<a href=\"mailto:$p[Email]\">$p[Name]</a> ($p[Role])";
         }
-        $o[Participants] = implode(", ", $participant_arr);
+        $o['Participants'] = implode(", ", $participant_arr);
     }
-    $o["Base URL"] = $r[BaseURL];
-    $o["Repository ID"] = $r[RepositoryIdentifier];
-    $o["OAI Version"] = $r[OaiVersion];
+    $o["Base URL"] = $r['BaseURL'];
+    $o["Repository ID"] = $r['RepositoryIdentifier'];
+    $o["OAI Version"] = $r['OaiVersion'];
     if ($tab2) {
         foreach ($tab2 as $v) {
             $o["OLAC Version"] .= "$v[SchemaName] ";
@@ -93,9 +95,9 @@ function get_archive_info($id)
     $link = 'http://search.language-archives.org/search.html?q=' . $qs;
     $o["Faceted search"] = "<a href=\"$link\">$link</a>";
     if ($archivetype == 'Dynamic')
-        $o[Explore] = "<a href=\"http://re.cs.uct.ac.za/cgi-bin/Explorer/2.0-1.46/testoai?archive=$r[BaseURL]\">Visit archive with the Repository Explorer</a>";
-    $o["Last Harvested"] = $r[LastHarvested];
-    $o["Current As Of"] = $r[CurrentAsOf];
+        $o['Explore'] = "<a href=\"http://re.cs.uct.ac.za/cgi-bin/Explorer/2.0-1.46/testoai?archive=$r[BaseURL]\">Visit archive with the Repository Explorer</a>";
+    $o["Last Harvested"] = $r['LastHarvested'];
+    $o["Current As Of"] = $r['CurrentAsOf'];
     if (count($tab4) > 0)
         $o["Latest Datestamp"] = $tab4[0]['DateStamp'];
     $o["Reports"] = "<a href=\"/metrics/$id\">Archive Metrics</a> and <a href=\"/checks/$id\">Integrity Checks</a>";
@@ -118,7 +120,7 @@ function get_archive_info($id)
 
 <?php
 
-$archiveid = $_GET[id];
+$archiveid = $_GET['id'];
 if (!$archiveid) {
 	$arr = explode('?', $_SERVER["REQUEST_URI"]);
 	$archiveid = basename($arr[0]);
