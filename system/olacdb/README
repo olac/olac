@@ -14,6 +14,8 @@ available from the OLAC SVN repository.
 	python loadtab.py -c ~/.my.cnf -t LanguageCodes -e latin-1
   $ sed 1d CountryCodes.tab | \
 	python loadtab.py -c ~/.my.cnf -t CountryCodes -e latin-1
+  $ sed 1d LanguageIndex.tab | \
+	python loadtab.py -c ~/.my.cnf -t LanguageIndex -e latin-1
   $ sed 1d iso-639-3.tab | \
 	python loadtab.py -c ~/.my.cnf -t ISO_639_3
   $ sed 1d collective_codes.tab | \
