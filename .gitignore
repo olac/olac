@@ -1,0 +1,3 @@
+web/static
+web/static-records
+!web/static/staticrecord.xsl
