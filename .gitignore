@@ -1,3 +1,4 @@
 web/static
 web/static-records
+web/xmldump
 !web/static/staticrecord.xsl
