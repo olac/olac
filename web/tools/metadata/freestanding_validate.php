@@ -21,7 +21,7 @@ $BASEURL = olacvar('baseurl');
 
 # If there is no metadata, go back to main page
 
-  if (!$HTTP_POST_VARS['metadata'])
+  if (!$_POST['metadata'])
   {
     $mainpage = "$BASEURL/tools/metadata/freestanding.html";
     header("Content-Type: text/html");
@@ -31,7 +31,7 @@ $BASEURL = olacvar('baseurl');
 
 # PHP changed " to \"; change it back
 
-  $metadata = ereg_replace('\\\"', '"', $HTTP_POST_VARS['metadata']);
+  $metadata = preg_replace('/\\\"/', '"', $_POST['metadata']);
 
 # $nssymbols : table of (tag name, namespace symbol)
 # This table tells to which namespace a tag belongs.
