@@ -116,6 +116,10 @@ def remove_foreign_key_constraints(schema):
     return schema
 
 
+def remove_auto_increment_setting(schema):
+    return re.sub(r" AUTO_INCREMENT=\d+ ", " ", schema)
+
+
 def initialize_tmp_db(cur, tmpdb, maindb):
     # we drop tables and recreate them to make sure that the schema
     # used by both tmpdb and maindb are identical
@@ -140,6 +144,7 @@ def initialize_tmp_db(cur, tmpdb, maindb):
         cur.execute("show create table %s.%s" % (maindb, tab))
         schema = cur.fetchone()[1]
         schema = remove_foreign_key_constraints(schema)
+        schema = remove_auto_increment_setting(schema)
         cur.execute(schema)
     cur.connection.select_db(maindb)
 
