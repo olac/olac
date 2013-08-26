@@ -17,8 +17,12 @@ STATICROOT = olac.olacvar('static/root')
 STATICSTATUS = olac.olacvar('static/status')
 
 def connect_db():
-    con = MySQLdb.connect(read_default_file="~/.my.cnf",
-                          read_default_group="client_dbm")
+    opts = {"use_unicode":True, "charset":"utf8"}
+    opts['host'] = olac.olacvar('mysql/host')
+    opts['db'] = olac.olacvar('mysql/olacdb')
+    opts['user'] = olac.olacvar('mysql/user')
+    opts['passwd'] = olac.olacvar('mysql/passwd')
+    con = MySQLdb.connect(**opts)
     cur = con.cursor()
     return con, cur
 
