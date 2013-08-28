@@ -96,16 +96,18 @@ function authenticate()
       echo "<p>system error";
       exit;
     }
-    $pass = $res[0][pass];
-    $res = $DB->sql("select password(\"$_SERVER[PHP_AUTH_PW]\") as pass");
-    if ($DB->saw_error()) {
-      echo "<p>system error";
-      exit;
-    }
-    $htpass = $res[0][pass];
+    if (count($res) > 0) {
+      $pass = $res[0][pass];
+      $res = $DB->sql("select password(\"$_SERVER[PHP_AUTH_PW]\") as pass");
+      if ($DB->saw_error()) {
+        echo "<p>system error";
+        exit;
+      }
+      $htpass = $res[0][pass];
 
-    if ($pass == $htpass)
-      $auth = TRUE;
+      if ($pass == $htpass)
+        $auth = TRUE;
+    }
   }
 
   if (!$auth) {
