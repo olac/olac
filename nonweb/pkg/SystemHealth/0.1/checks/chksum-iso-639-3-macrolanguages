@@ -1,0 +1,14 @@
+#! /bin/sh
+
+echo "Check if ISO 639-3 Macrolanguagestable is current..."
+
+URL="http://www-01.sil.org/iso639-3/iso-639-3-macrolanguages.tab"
+CHKSUM="036cffcb8678d3d3e1a34aa855e40d09"
+
+NEW_CHKSUM=$(curl -s -L "$URL" | md5sum | cut -d' ' -f 1)
+
+if [ "$NEW_CHKSUM" = "$CHKSUM" ]; then
+    echo PASS
+else
+    echo FAIL
+fi

@@ -1,0 +1,14 @@
+#! /bin/sh
+
+echo "Check if ISO 639-3 Retirements table is current..."
+
+URL="http://www-01.sil.org/iso639-3/iso-639-3_Retirements.tab"
+CHKSUM="8be9f942fd0abb269c0a22c8763e849f"
+
+NEW_CHKSUM=$(curl -s -L "$URL" | md5sum | cut -d' ' -f 1)
+
+if [ "$NEW_CHKSUM" = "$CHKSUM" ]; then
+    echo PASS
+else
+    echo FAIL
+fi
