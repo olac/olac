@@ -28,7 +28,7 @@ class CitationGenerator {
 
   function cite($oaiid) {
     fwrite($this->pipes[0], $oaiid . "\n");
-    return stream_get_line($this->pipes[1], 8192, "\n");
+    return fgets($this->pipes[1]);
   }
 
   function close() {
