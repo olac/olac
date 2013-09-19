@@ -4,7 +4,7 @@ require_once('olac.php');
 
 function mail_by_olac_admin($to, $subject, $msg, $cc="")
 {
-  $header = "From: " . olacvar('olac_admin_email') . "\r\n";
+  $header = "From: olac-server\r\n";
   $header .= "Reply-To: " . olacvar('olac_admin_email') . "\r\n";
   if ($cc) $header .= "Cc: $cc\r\n";
   $header .= "X-Mailer: PHP/" . phpversion();
