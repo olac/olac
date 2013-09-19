@@ -66,8 +66,8 @@ function change_baseurl($repoid, $repotype, $url)
 
 $magic = $_GET["v"];
 $DB = new OLACDB();
-$sql = "select * from PendingConfirmation c, OLAC_ARCHIVE oa ";
-$sql .= "where c.repository_id=oa.RepositoryIdentifier ";
+$sql = "select * from PendingConfirmation c, ARCHIVES a ";
+$sql .= "where c.repository_id=a.ID ";
 $sql .= "and c.magic_string='$magic' and c.ctype is null";
 $rows = $DB->sql($sql);
 if ($DB->saw_error()) {
