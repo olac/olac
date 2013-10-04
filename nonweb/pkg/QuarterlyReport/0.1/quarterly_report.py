@@ -262,10 +262,10 @@ def composeEmail(archiveId, metrics, usageh, usagec):
 
     return template % params
 
-def sendReport(msg, emails, bcc, archiveId, isTest):
+def sendReport(msg, emails, bcc, archiveId, subjectPrefix=''):
     sender = "olac-admin@language-archives.org"
     subject = "Archive Report for %s" % archiveId
-    if isTest: subject = "(testing) " + subject
+    subject = subjectPrefix + subject
     header = "From: %s\r\nTo: %s\r\nSubject: %s\r\n" % \
              (sender, ", ".join(emails), subject)
     msg = header + "\r\n" + msg
@@ -417,9 +417,9 @@ usage: %prog -h
     op.add_option("-a", "--all", dest="all",
                   action="store_true", default=False,
                   help="process all archives")
-    op.add_option("-t", "--to", dest="receipient",
+    op.add_option("-t", "--to", dest="recipient",
                   metavar="EMAIL",
-                  help="specify receipient of reports; ignored unless -s option is used")
+                  help="specify recipient of reports; ignored unless -s option is used")
     op.add_option("-b", "--bcc", dest="blindcc",
                   metavar="EMAIL",
                   help="specify bcc list; ignored in the absence of -s option")
@@ -448,11 +448,11 @@ usage: %prog -h
     usageh = GA('hits')
     usagec = GA('clicks')
 
-    if opts.receipient:
-        L = re.split(r"[,; ]+", opts.receipient)
-        test_receipient = [normalizeEmailAddress(x) for x in L]
+    if opts.recipient:
+        L = re.split(r"[,; ]+", opts.recipient)
+        test_recipient = [normalizeEmailAddress(x) for x in L]
     else:
-        test_receipient = None   # the real curator email address is used
+        test_recipient = None   # the real curator email address is used
     if opts.blindcc:
         L = re.split(r"[,; ]+", opts.blindcc)
         bcc = [normalizeEmailAddress(x) for x in L]
@@ -461,17 +461,38 @@ usage: %prog -h
     sendemail = opts.send
     
     for archiveId in archiveIds:
-        msg = composeEmail(archiveId, metrics, usageh, usagec)
-        if sendemail:
-            row = metrics.findRow('RepositoryIdentifier',archiveId)
-            repoName = row["RepositoryName"]
-            if test_receipient:
-                sendReport(msg, test_receipient, bcc, repoName, True)
-            else:
-                receipient = metrics.participants(archiveId)
-                if receipient:
-                    sendReport(msg, receipient, bcc, repoName, False)
+        try:
+            msg = composeEmail(archiveId, metrics, usageh, usagec)
+            error = False
+        except:
+            msg = "Error occurred while creating a report for %s." % archiveId
+            error = True
+
+        row = metrics.findRow('RepositoryIdentifier',archiveId)
+        repoName = row["RepositoryName"]
+        if error:
+            recipient = [x.strip() for x in olac.olacvar('olac_admin_email').split(',')]
+            prefix = 'Problem: '
+        elif test_recipient:
+            recipient = test_recipient
+            prefix = '(testing) '
         else:
-            print "-" * 79
-            print msg
-            print
+            recipient = metrics.participants(archiveId)
+            prefix = ''
+
+        if sendemail:
+            if recipient:
+                sendReport(msg, recipient, bcc, repoName, prefix)
+        else:
+            if error:
+                out = sys.stderr
+            else:
+                out = sys.stdout
+            print >>out, "=" * 79
+            print >>out, "Subject heading: %s" % prefix
+            print >>out, "Recipients: %s" % str(recipient)
+            print >>out, "BCC: %s" % str(bcc)
+            print >>out, "-" * 79
+            print >>out, msg
+            print >>out
+
