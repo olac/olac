@@ -1,0 +1,16 @@
+#! /bin/bash
+
+get_archives() {
+    user=$(olacvar mysql/user)
+    pw=$(olacvar mysql/passwd)
+    db=$(olacvar mysql/olacdb)
+    host=$(olacvar mysql/host)
+    sql="select a.ID from ARCHIVES a left join OLAC_ARCHIVE oa on a.ID=oa.RepositoryIdentifier where a.dateApproved is not null and oa.Archive_ID is null"
+    echo $sql | mysql -N -h $host -u $user -p"$pw" $db 2>/dev/null
+}
+
+get_archives | while read a; do
+    echo "Check if $a is unpurged..."
+    echo FAIL
+done
+
