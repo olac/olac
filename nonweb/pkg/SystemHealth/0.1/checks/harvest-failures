@@ -11,7 +11,7 @@ get_archives() {
 
 get_archives | while read a b; do
     if [ "$b" -ge 7 ]; then
-        echo "Checking if $a was harvested within a week..."
+        echo "Check if $a was harvested within a week..."
         echo FAIL
     fi
 done
