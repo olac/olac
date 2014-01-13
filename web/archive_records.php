@@ -101,6 +101,18 @@ function select_new_archive() {
 
 <?php
 if ($archiveid) {
+  $archiveid1 = $DB->escape($archiveid);
+
+  $tab = $DB->sql("
+    select count(distinct Item_ID) c
+    from   ARCHIVED_ITEM, OLAC_ARCHIVE
+    where  ARCHIVED_ITEM.Archive_ID = OLAC_ARCHIVE.Archive_ID
+    and    OLAC_ARCHIVE.RepositoryIdentifier = '$archiveid1'");
+  $DB->saw_error() and die("Query failed");
+
+  $records = $tab[0]['c'];
+  print "<hr><h2>$records record(s) from $archiveid</h2>";
+
   $tab = $DB->sql("
     select Item_ID, OaiIdentifier
     from   ARCHIVED_ITEM, OLAC_ARCHIVE
@@ -110,23 +122,14 @@ if ($archiveid) {
   $DB->saw_error() and die("Query failed");
 
   $count = 1;
-  $archive_ids = array();
-  $record_ids = array();
-  $output = "";
 
   if ($tab) foreach ($tab as $row) {
-    $output .= <<<END
+    print <<<END
 <p>$count.
 <a href="/item/$row[OaiIdentifier]">$row[OaiIdentifier]</a>
 END;
-
-    $record_ids[$row[Item_ID]] = 1;
     $count++;
   }
-
-  $records = sizeof($record_ids);
-  print "<hr><h2>$records record(s) from $archiveid</h2>";
-  print $output;
 }
 
 ?>
