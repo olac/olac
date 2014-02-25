@@ -3,7 +3,7 @@
 echo "Check if ISO 639-3 table is current..."
 
 URL="http://www-01.sil.org/iso639-3/iso-639-3.tab"
-CHKSUM="b8cf6d94a614a25790012c53ae2fcaa1"
+CHKSUM="5b610a063f156280cea2e64c8dd81db0"
 
 NEW_CHKSUM=$(curl -s -L "$URL" | md5sum | cut -d' ' -f 1)
 
