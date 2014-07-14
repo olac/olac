@@ -8,6 +8,8 @@
 
   ChangeLog:
 
+  2014-07-14  Haejoong Lee  <haejoong@ldc.upenn.edu>
+        * Accounted for deleted records in checking metadata element counts.
   2005-11-29  Haejoong Lee  <haejoong@ldc.upenn.edu>
         * Changed drafts/repositories.html to OLAC/repositories.html
   2003-02-28  Haejoong Lee  <haejoong@ldc.upenn.edu>
@@ -67,8 +69,11 @@
       <assert test="//oai:record">ERROR: ListRecords: no record element was found</assert>
       <report test="//oai:record">ListRecords: at least one record was found - OK</report>
     </rule>
-    <rule context="oai:ListRecords/oai:record">
+    <rule context="oai:ListRecords/oai:record[./oai:header[not(@status)]]">
       <assert test="count(oai:metadata) = 1">ERROR: ListRecords: a record does not have exactly one metadata element</assert>
+    </rule>
+    <rule context="oai:ListRecords/oai:record[./oai:header[@status='deleted']]">
+      <assert test="count(oai:metadata) = 0">ERROR: ListRecords: deleted record has a metadata element</assert>
     </rule>
     <rule context="oai:ListRecords/oai:record/oai:metadata">
       <assert test="olac:olac">ERROR: ListRecords: a metadata element has no olac sub-element</assert>

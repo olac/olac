@@ -74,7 +74,7 @@
 </axsl:if>
     <axsl:apply-templates mode="M8"/>
   </axsl:template>
-  <axsl:template match="oai:ListRecords/oai:record" priority="3999" mode="M8">
+  <axsl:template match="oai:ListRecords/oai:record[./oai:header[not(@status)]]" priority="3999" mode="M8">
     <axsl:choose>
       <axsl:when test="count(oai:metadata) = 1"/>
       <axsl:otherwise>In pattern count(oai:metadata) = 1:
@@ -83,7 +83,16 @@
     </axsl:choose>
     <axsl:apply-templates mode="M8"/>
   </axsl:template>
-  <axsl:template match="oai:ListRecords/oai:record/oai:metadata" priority="3998" mode="M8">
+  <axsl:template match="oai:ListRecords/oai:record[./oai:header[@status='deleted']]" priority="3998" mode="M8">
+    <axsl:choose>
+      <axsl:when test="count(oai:metadata) = 0"/>
+      <axsl:otherwise>In pattern count(oai:metadata) = 0:
+   ERROR: ListRecords: deleted record has a metadata element
+</axsl:otherwise>
+    </axsl:choose>
+    <axsl:apply-templates mode="M8"/>
+  </axsl:template>
+  <axsl:template match="oai:ListRecords/oai:record/oai:metadata" priority="3997" mode="M8">
     <axsl:choose>
       <axsl:when test="olac:olac"/>
       <axsl:otherwise>In pattern olac:olac:
