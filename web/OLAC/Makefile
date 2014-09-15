@@ -1,7 +1,7 @@
 # Build documents
 
 XSLT = java org.apache.xalan.xslt.Process
-OLAC_XSL = ../OLAC_doc.xsl
+OLAC_XSL = ./OLAC_doc.xsl
 LATEST = ../document_latest.sh
 
 ### Documents in the OLAC Process
