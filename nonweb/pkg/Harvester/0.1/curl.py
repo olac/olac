@@ -78,6 +78,8 @@ class MyCurl:
         curl.setopt(pycurl.HEADERFUNCTION, self._callback_headerFunc)
         # timeout works against large repository hosted on a slow machine
         curl.setopt(pycurl.TIMEOUT, 1200)
+        curl.setopt(pycurl.SSL_VERIFYPEER, 0)
+        curl.setopt(pycurl.SSL_VERIFYHOST, 0)
         try:
             stderr = sys.stderr
             sys.stderr = open('/dev/null','w')
