@@ -104,7 +104,7 @@ if [ ${new_records:-0} -gt 0 -o "$1" = "MONTHLY" -o -f "$(olacvar dirty)" ]; the
     echo
     echo "Creating an XML dump and static record pages..."
     echo
-    dumpnam=$XMLDUMPDIR/ListRecords-`date +%Y%m%d-%H%M%S`.xml.gz
+    dumpnam=$XMLDUMPDIR/ListRecords-`date +%Y%m%d`.xml.gz
     $PYTHON $(olacvar xmldump) $dumpnam $SRECDIR 2>/dev/null
     ln -sf $dumpnam $XMLDUMPDIR/ListRecords.xml.gz
     cat > $SRECDIR/index.html <<EOF
