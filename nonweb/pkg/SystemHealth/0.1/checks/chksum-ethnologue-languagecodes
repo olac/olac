@@ -3,7 +3,7 @@
 echo "Check if Ethnologue LanguageCodes.tab is current..."
 
 URL="http://www.ethnologue.com/codes/LanguageCodes.tab"
-CHKSUM="2b4b75598d9c79ae53495b8582a8159e"
+CHKSUM="d5e741a7c67cd3fd82538bdbeb08de12"
 
 NEW_CHKSUM=$(curl -s -L "$URL" | md5sum | cut -d' ' -f 1)
 
