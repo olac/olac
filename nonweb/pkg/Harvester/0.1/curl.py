@@ -18,8 +18,10 @@ __all__ = ["MyUrl", "MyCurl", "StopFetching"]
 class StopFetching: pass
 
 class MyUrl(unicode):
-    def __init__(self, *args):
-        unicode.__init__(self, *args)
+    def __new__(self, url):
+        return super(MyUrl, cls).__new__(cls, url)
+
+    def __init__(self, url):
         self.referer = None
         self.postdata = None
         self.offset = 0
