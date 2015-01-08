@@ -18,7 +18,7 @@ __all__ = ["MyUrl", "MyCurl", "StopFetching"]
 class StopFetching: pass
 
 class MyUrl(unicode):
-    def __new__(self, url):
+    def __new__(cls, url):
         return super(MyUrl, cls).__new__(cls, url)
 
     def __init__(self, url):
