@@ -46,7 +46,7 @@ function myflush() {
 
 
 function get_data($file, $url) {
-  system("curl -s -L -o '$file' '$url'", $retval);
+  system("curl -s -L -H 'Accept-Encoding: identity' -o '$file' '$url'", $retval);
   if ($retval == 23) {
     error("Download failed due to a system error: write error");
     return 0;
@@ -59,7 +59,7 @@ function get_data($file, $url) {
 
 function get_some_data($url, $n, &$data) {
   $n = intval($n);
-  exec("curl -s -L -r 0-$n '$url'", $arr, $retval);
+  exec("curl -s -L -H 'Accept-Encoding: identity' -r 0-$n '$url'", $arr, $retval);
   if ($retval == 23) {
     error("Download failed due to a system error: no space left");
     return FALSE;
