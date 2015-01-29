@@ -26,7 +26,7 @@
 	    var http = harvest(qs.confirm, p);
 	} else {
 	    var baseurl =
-		window.location.protocol + '://' +
+		window.location.protocol + '//' +
 		window.location.host +
 		window.location.pathname;
 	    write('If you want to request a new harvest, ' +
