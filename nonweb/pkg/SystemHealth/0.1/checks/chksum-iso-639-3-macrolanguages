@@ -3,7 +3,7 @@
 echo "Check if ISO 639-3 Macrolanguagestable is current..."
 
 URL="http://www-01.sil.org/iso639-3/iso-639-3-macrolanguages.tab"
-CHKSUM="036cffcb8678d3d3e1a34aa855e40d09"
+CHKSUM="6ddb5f0090fc1cd2cc36b888efbc55f6"
 
 NEW_CHKSUM=$(curl -s -L "$URL" | md5sum | cut -d' ' -f 1)
 
