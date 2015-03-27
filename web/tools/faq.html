@@ -118,7 +118,7 @@
             </li>
          </ol>
          <h4>Registering and improving a repository</h4>
-         <ol start="17">
+         <ol start="16">
             <li>
                <a href="#register">How do I register my repository with OLAC?</a>
             </li>
@@ -131,6 +131,9 @@
             </li>
             <li>
                <a href="#changes">Why aren't my changes being harvested?</a>
+            </li>
+            <li>
+               <a href="#force">How can I force my repository to be reharvested?</a>
             </li>
             <li>
                <a href="#move">How do I move my repository?</a>
@@ -704,7 +707,9 @@
                   datestamps in the record headers. Remember that the datestamp is the revision date
                   for the metadata record, not for the resource it describes. Thus if the datestamp
                   is not updated to the current date when a record is updated, it will not be picked
-                  up by an incremental harvest. The remedy is to update the datestamps.</p>
+                  up by an incremental harvest. The remedy is to update the datestamps. If this is not
+               the cause of the problem, then go to the next question to learn how to force 
+               complete reharvest of your repository.</p>
             </li>
          </ul>
          <p>As a guard against failure to update datestamps, a complete reharvest of every
@@ -719,6 +724,28 @@
             database for up to one month until the monthly reharvest is performed.</p>
 
          <h3 class="Question">
+            <a name="force">How can I force my repository to be reharvested?</a>
+         </h3>
+         <p>When making changes to a repository, you may want to force an immediate reharvest 
+            rather than waiting for the next scheduled incremental harvest. It is also possible that 
+            the complete reharvest which takes place on a monthly basis could lose records
+            if there are problems on your server that cause the process to timeout or otherwise fail
+            to return the records that it should.
+            For these situations there is a service for forcing an immediate complete
+            reharvest.  Access the service by going to <a
+               href="harvester/harvest.html">this</a> page. In
+            your browser add <tt>?id=</tt> followed by the Repository ID of your repository
+            at the end of the current URL, then 
+            submit that amended URL to your browser. You will be informed that a confirmation email has been
+            sent to the <tt>adminEmail</tt> that is identified in your Identify response. If you are that administrator, 
+            open the confirmation message and click on the linkn it contains. Otherwise, alert the 
+            repository administrator that they should have gotten such a message and that they need to
+            click the link within it.
+            As soon as the confirmation link is clicked, the service begins the harvesting process
+            and progress is reported on the screen.
+         </p>
+      
+         <h3 class="Question">
             <a name="move">How do I move my repository to a different base URL?</a>
          </h3>
          <p>If you want to move the base URL for your repository (without changing the repository
@@ -731,6 +758,7 @@
             existing repository and registration, and then instruct you to register the new
             repository.</p>
       </div>
+      
 
       <hr />
       <p><i>Comments? Further questions? Please click the </i>mailto:<i> link below to give us
