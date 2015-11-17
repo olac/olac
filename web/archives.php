@@ -178,7 +178,7 @@ for full details on any archive follow the link on the right.
 <li> <a href="/register/archive_list.php">Machine readable list of registered archives</a>
 <li> <a href="/metrics/">Metrics report on all archives</a>
 <li> <a href="/metrics/compare">Comparative archive metrics</a>
-
+<li> <a href="/submission-policies.html">Archive submission policies</a>
 <p>
 <hr>
 
