@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xml:base="http://www.language-archives.org/vocabulary/type">
+    <skos:ConceptScheme rdf:about="http://www.language-archives.org/vocabulary/type">
+        <dc:title>OLAC Linguistic Data Type Vocabulary</dc:title>
+        <dcterms:issued>2006-04-06</dcterms:issued>
+        <dc:publisher>Open Language Archives Community</dc:publisher>
+        <dc:description>This document specifies the codes, or controlled vocabulary, for the
+            Linguistic Data Type extension of the DCMI Type element. These codes describe the
+            content of a resource from the standpoint of recognized structural types of linguistic
+            information.</dc:description>
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/REC/type.html"/>
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/vocabulary/type.rdf"/>
+        <skos:hasTopConcept rdf:resource="#language_description"/>
+        <skos:hasTopConcept rdf:resource="#lexicon"/>
+        <skos:hasTopConcept rdf:resource="#primary_text"/>
+    </skos:ConceptScheme>
+    <skos:Concept rdf:about="#lexicon">
+        <skos:prefLabel>Lexicon</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/type"/>
+        <skos:definition>The resource includes a systematic listing of lexical
+            items.</skos:definition>
+        <skos:scopeNote>Lexicon may be used to describe any resource which includes a systematic
+            listing of lexical items. Each lexical item may, but need not, be accompanied by a
+            definition, a description of the referent (in the case of proper names), or an
+            indication of the item's semantic relationship to other lexical items.</skos:scopeNote>
+        <skos:example>Examples include word lists (including comparative word lists), thesauri,
+            wordnets, framenets, and dictionaries, including specialized dictionaries such as
+            bilingual and multilingual dictionaries, dictionaries of terminology, and dictionaries
+            of proper names. Non-word-based examples include phrasal lexicons and lexicons of
+            intonational tunes.</skos:example>
+    </skos:Concept>
+    <skos:Concept rdf:about="#primary_text">
+        <skos:prefLabel>Primary Text</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/type"/>
+        <skos:definition>Linguistic material which is itself the object of study, typically material
+            in the subject language which is a performance of a speech event, or the written analog
+            of such an event. </skos:definition>
+        <skos:scopeNote>Primary Text is used to describe material in the subject language; it
+            reflects a speech event, or is the written analog, and embodies linguistic features
+            which make it an object of analysis or research. Typically, a primary text has temporal
+            structure. Most often in a primary text, the timecourse of some real or fictional
+            linguistic event, e.g., a conversation, elicitation session, or imagined scene, is
+            carried over into the archived artifact. Note: Primary_text describes the content of the
+            resource, not the physical format. A primary text may be recorded in different physical
+            media, e.g. as videotaped, audiotaped, or written text. Physical format is described
+            using the Format element.</skos:scopeNote>
+        <skos:example>Examples of primary texts include transcribed interlinear texts, letters,
+            (audiotaped) elicitation sessions, (videotaped) rituals or story-telling sessions, and
+            any other recorded speech or writing which exemplifies language structure or use in such
+            a way as to become an object of study. When a corpus is a collection of primary texts,
+            it should be described both as a primary text (OLAC Linguistic Type) and as a collection
+            (DC Type).</skos:example>
+    </skos:Concept>
+    <skos:Concept rdf:about="#language_description">
+        <skos:prefLabel>Language Description</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/type"/>
+        <skos:definition>The resource describes a language or some aspect(s) of a language via a
+            systematic documentation of linguistic structures.</skos:definition>
+        <skos:scopeNote>Not every resource commonly termed 'descriptive' should be described with
+            this code; for example, a description of Zamenhof, the creator of Esperanto, would not
+            be classified using this code. Instead, the code should be reserved for a resource that
+            describes a language or some aspect of a language, typically in prose with interspersed
+            examples. The similarly named code, Language Documentation (in the Linguistic Subject
+            extension) refers to a field of study. This category, Language Description, refers to
+            recognized structural types of linguistic information, which are the products of the
+            field of study, e.g., grammars and field notes.</skos:scopeNote>
+        <skos:example>Examples of descriptions include a formal grammar, a sketch grammar, field
+            notes, a phonological sketch.</skos:example>
+    </skos:Concept>
+</rdf:RDF>

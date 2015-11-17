@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/"
+     xml:base="http://www.language-archives.org/vocabulary/discourse">
+     <skos:ConceptScheme rdf:about="http://www.language-archives.org/vocabulary/discourse">
+          <dc:title>OLAC Discourse Type Vocabulary</dc:title>
+          <dcterms:issued>2012-02-04</dcterms:issued>
+          <dc:publisher>Open Language Archives Community</dc:publisher>
+          <dc:description>This document specifies the codes, or controlled
+               vocabulary, for the Discourse Type extension of the
+               Type metadata element. These codes describe the content
+               of a resource as structured in such a way as to
+               represent a particular type of
+               discourse.</dc:description>
+          <rdfs:isDefinedBy
+               rdf:resource="http://www.language-archives.org/REC/discourse.html"/>
+          <rdfs:isDefinedBy
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse.rdf"/>
+          <skos:hasTopConcept rdf:resource="#dialogue"/>
+          <skos:hasTopConcept rdf:resource="#drama"/>
+          <skos:hasTopConcept rdf:resource="#formulaic"/>
+          <skos:hasTopConcept rdf:resource="#ludic"/>
+          <skos:hasTopConcept rdf:resource="#narrative"/>
+          <skos:hasTopConcept rdf:resource="#oratory"/>
+          <skos:hasTopConcept rdf:resource="#procedural"/>
+          <skos:hasTopConcept rdf:resource="#report"/>
+          <skos:hasTopConcept rdf:resource="#singing"/>
+          <skos:hasTopConcept rdf:resource="#unintelligible_speech"/>
+     </skos:ConceptScheme>
+     <skos:Concept rdf:about="#dialogue">
+          <skos:prefLabel>Dialogue</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>An interactive discourse with two or more
+               participants.</skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of dialogues include conversations, interviews,
+               correspondence, consultations, greetings and
+               leave-takings.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#drama">
+          <skos:prefLabel>Drama</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>A planned, creative, rendition of discourse involving
+               two or more participants.</skos:definition>
+          <skos:scopeNote>Usually a drama involves mimesis of events, either
+               real or imagined.</skos:scopeNote>
+          <skos:example>Examples of drama include plays, skits, and enacted
+               scenes.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#formulaic">
+          <skos:prefLabel>Formulaic Discourse</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>The resource is a ritually or conventionally
+               structured discourse.</skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of formulaic discourse are prayers, curses,
+               blessings, charms, curing rituals, marriage vows, and
+               oaths.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#ludic">
+          <skos:prefLabel>Ludic Discourse</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>Ludic discourse is language whose primary function is
+               to be part of play, or a style of speech that involves
+               a creative manipulation of the structures of the
+               language. </skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of ludic discourse are play languages, jokes,
+               secret languages, and speech disguises.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#oratory">
+          <skos:prefLabel>Oratory</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>Public speaking, or of speaking eloquently according
+               to rules or conventions.</skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of oratory include sermons, lectures, political
+               speeches, and invocations.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#narrative">
+          <skos:prefLabel>Narrative Discourse</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>A monologic discourse which represents temporally
+               organized events.</skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Types of narratives include historical, traditional, and
+               personal narratives, myths, folktales, fables, and
+               humorous stories.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#procedural">
+          <skos:prefLabel>Procedural Discourse</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>An explanation or description of a method, process,
+               or situation having ordered steps. </skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of procedural discourses include recipes,
+               instructions, and plans.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#report">
+          <skos:prefLabel>Report</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>A factual account of some event or
+               circumstance.</skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of reports include news reports, essays, and
+               commentaries.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#singing">
+          <skos:prefLabel>Singing</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>"Words or sounds [articulated] in succession with
+               musical inflections or modulations of the voice" OED. </skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of singing include chants, songs, and
+               choruses.</skos:example>
+     </skos:Concept>
+     <skos:Concept rdf:about="#unintelligible_speech">
+          <skos:prefLabel>Unintelligible Speech</skos:prefLabel>
+          <skos:inScheme
+               rdf:resource="http://www.language-archives.org/vocabulary/discourse"/>
+          <skos:definition>The resource consists of utterances that are not
+               intended to be interpretable as ordinary
+               language.</skos:definition>
+          <skos:scopeNote/>
+          <skos:example>Examples of unintelligible speech include sacred
+               languages, Examples of unintelligible speech include
+               sacred languages, glossolalia, and singing syllables
+               (fa-la-la).</skos:example>
+     </skos:Concept>
+</rdf:RDF>

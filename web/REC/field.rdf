@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+	xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:dcterms="http://purl.org/dc/terms/"
+	xml:base="http://www.language-archives.org/vocabulary/field">
+	<skos:ConceptScheme rdf:about="http://www.language-archives.org/vocabulary/field">
+		<dc:title>OLAC Linguistic Subject Vocabulary</dc:title>
+		<dcterms:issued>2006-04-06</dcterms:issued>
+		<dc:publisher>Open Language Archives Community</dc:publisher>
+		<dc:description>This document specifies the codes, or suggested vocabulary, for the
+			'linguistic' value of the xsi:type attribute of the OLAC Subject element. These codes
+			describe the content of a resource as about a particular subfield of linguistic science,
+			or about the level of linguistic structure which is the primary concern of a given
+			subfield.</dc:description>
+		<rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/REC/field.html"/>
+		<rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/vocabulary/field.rdf"/>
+		<skos:hasTopConcept rdf:resource="#anthropological_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#applied_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#cognitive_science"/>
+		<skos:hasTopConcept rdf:resource="#computational_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#discourse_analysis"/>
+		<skos:hasTopConcept rdf:resource="#forensic_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#general_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#historical_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#history_of_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#language_acquisition"/>
+		<skos:hasTopConcept rdf:resource="#language_documentation"/>
+		<skos:hasTopConcept rdf:resource="#lexicography"/>
+		<skos:hasTopConcept rdf:resource="#linguistic_theories"/>
+		<skos:hasTopConcept rdf:resource="#linguistics_and_literature"/>
+		<skos:hasTopConcept rdf:resource="#mathematical_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#morphology"/>
+		<skos:hasTopConcept rdf:resource="#neurolinguistics"/>
+		<skos:hasTopConcept rdf:resource="#philosophy_of_language"/>
+		<skos:hasTopConcept rdf:resource="#phonetics"/>
+		<skos:hasTopConcept rdf:resource="#phonology"/>
+		<skos:hasTopConcept rdf:resource="#pragmatics"/>
+		<skos:hasTopConcept rdf:resource="#psycholinguistics"/>
+		<skos:hasTopConcept rdf:resource="#semantics"/>
+		<skos:hasTopConcept rdf:resource="#sociolinguistics"/>
+		<skos:hasTopConcept rdf:resource="#syntax"/>
+		<skos:hasTopConcept rdf:resource="#text_and_corpus_linguistics"/>
+		<skos:hasTopConcept rdf:resource="#translating_and_interpreting"/>
+		<skos:hasTopConcept rdf:resource="#typology"/>
+		<skos:hasTopConcept rdf:resource="#writing_systems"/>
+	</skos:ConceptScheme>
+	<skos:Concept rdf:about="#anthropological_linguistics">
+		<skos:prefLabel>Anthropological Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of language with particular reference to the society and culture
+			of the speakers. </skos:definition>
+		<skos:scopeNote>Anthropological linguistics often concerns less well-documented languages.
+			The definition includes 'ethnolinguistics.' The category is equivalent to the Library of
+			Congress subject heading of the same name.</skos:scopeNote>
+		<skos:example>The SIL Ethnologue, which collects data on the number on speakers of a
+			language and the geographical region in which it is spoken.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#applied_linguistics">
+		<skos:prefLabel>Applied Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The use of linguistic methods as applied to language and education, for
+			example to literacy or language learning. </skos:definition>
+		<skos:scopeNote>The definition includes TESOL, ESL, Second Language Teaching, Second
+			Language Learning and Contrastive Linguistics. This category is equivalent to the
+			Library of Congress subject heading 'Language and Education,' not the LCSH category
+			'Applied Linguistics,' which includes computer applications of linguistics. In the
+			'OLAC-Linguistic' extension of the DCMI Subject element, computer applications should be
+			classified as Computational Linguistics.</skos:scopeNote>
+		<skos:example>Teaching materials, guides for language teachers, and studies of adult
+			language learning.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#cognitive_science">
+		<skos:prefLabel>Cognitive Science</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of human cognition, particularly as it relates to language. </skos:definition>
+		<skos:scopeNote>The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>An experiment on language and vision or a book on the study of
+			mind.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#computational_linguistics">
+		<skos:prefLabel>Computational Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The use of computer science in the study of language. </skos:definition>
+		<skos:scopeNote>The definition includes Artificial Intelligence and Natural Language
+			Processing, but not Mathematical Linguistics. The category is equivalent to the Library
+			of Congress subject heading of the same name.</skos:scopeNote>
+		<skos:example>Books and papers dealing with Machine Translation, Text to Speech software,
+			and algorithms to parse sentences.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#discourse_analysis">
+		<skos:prefLabel>Discourse Analysis</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the patterns and meanings behind connected speech. </skos:definition>
+		<skos:scopeNote>The definition includes Humor Studies, Conversation Analysis, Interactional
+			Sociolinguistics, and studies of language use in special circumstances, e.g. Courtroom
+			Language. The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>Transcripts of discourse, perhaps with turn taking and speaker overlap
+			highlighted; papers on Discourse Representation Theory or on different talk types such
+			as doctor/patient interaction; and audio and video tapes of interactive discourse which
+			might serve as an object of study.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#forensic_linguistics">
+		<skos:prefLabel>Forensic Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> Applications of linguistic science to the domain of law. </skos:definition>
+		<skos:scopeNote>Forensic linguistics refers to the use of linguistic methodology to make
+			legal determinations. Analyses of courtroom language are best classified as Discourse
+			Analysis. The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>Papers on issues in dispute in court cases, e.g., authorship identification,
+			assessment of ambiguity in texts, voice attribution.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#general_linguistics">
+		<skos:prefLabel>General Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The broad study of linguistics without specialization in any subfield or
+			particular reference to a specific linguistic theory. </skos:definition>
+		<skos:scopeNote>Resources that cover many subfields in depth, perhaps a dissertation on an
+			endangered language with a detailed syntactic and phonological analysis, should be
+			classified under all the relevant subfields instead of 'General
+			Linguistics'.</skos:scopeNote>
+		<skos:example>Broad, often introductory textbooks such as The Cambridge Encyclopaedia of
+			Language (Crystal, 1987), and glossaries of linguistic terminology.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#historical_linguistics">
+		<skos:prefLabel>Historical Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The diachronic study of language change. </skos:definition>
+		<skos:scopeNote>The definition includes Comparative Historical Linguistics, Genetic
+			Classification, and philological and etymological study. The last may also be classified
+			as Lexicography. The category Historical Linguistics is equivalent to the Library of
+			Congress subject heading of the same name.</skos:scopeNote>
+		<skos:example>A study of the diachronic development of vowels in Romance.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#history_of_linguistics">
+		<skos:prefLabel>History of Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> Study of the history and development of linguistic science. </skos:definition>
+		<skos:scopeNote/>
+		<skos:example>A biography of Ferdinand de Saussure, or an analysis of Plato's discussions on
+			language.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#language_acquisition">
+		<skos:prefLabel>Language Acquisition</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition>The study of the process of acquiring human language.</skos:definition>
+		<skos:scopeNote>Language Acquisition may be used to describe materials relating to either
+			adult or child language acquisition, and to either first or later language acquisition.
+			However, if the materials deal specifically with language teaching, or with the process
+			of language learning from a pedagogical point of view, they may be best classified as
+			Applied Linguistics. The category is equivalent to the Library of Congress subject
+			heading of the same name.</skos:scopeNote>
+		<skos:example>Studies of first language acquisition, audio or video tapes of language
+			acquisition experiments, and guides to experimental techniques in eliciting acquisition
+			data.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#language_documentation">
+		<skos:prefLabel>Language Documentation</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The theory, methodology, and process of language description and
+			documentation, including linguistic field methods and fieldwork techniques. </skos:definition>
+		<skos:scopeNote/>
+		<skos:example>A manual on fieldwork techniques.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#lexicography">
+		<skos:prefLabel>Lexicography</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The process of compiling or studying lexical resources and dictionaries,
+			either monolingual or multilingual. </skos:definition>
+		<skos:scopeNote>The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>Books and papers about creating dictionaries. Swadesh word lists, a bilingual
+			Avestan-Engliah dictionary, and a collection of legal terms in a particular
+			language.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#linguistics_and_literature">
+		<skos:prefLabel>Linguistics and Literature</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition>The application of linguistic analysis to literary texts, e.g., fiction,
+			drama, or poetry.</skos:definition>
+		<skos:scopeNote>The definition includes Stylistics and Poetics. Resources classified under
+			this category would also be classified under the Library of Congress subject heading of
+			the same name; however, the LCSH does not include Poetics and Stylistics, which are
+			separate LCSH fields.</skos:scopeNote>
+		<skos:example>An analysis of lexical patterns characteristic of a particular author or
+			syntactic constructions used to create specific literary effects.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#linguistic_theories">
+		<skos:prefLabel>Linguistic Theories</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition>Theories (argued to be) fundamental to linguistic science, often spanning
+			more than one subfield such as phonology and syntax. </skos:definition>
+		<skos:scopeNote/>
+		<skos:example>Papers arguing for or against Universal Grammar, Transformational Grammar, or
+			Montague Grammar.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#mathematical_linguistics">
+		<skos:prefLabel>Mathematical Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The field of study which treats the mathematical properties of language. </skos:definition>
+		<skos:scopeNote>The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>A linguistic paper about the formal properties of grammars.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#morphology">
+		<skos:prefLabel>Morphology</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the structure and constituency of individual words. </skos:definition>
+		<skos:scopeNote>A resource consisting primarily of data from a morphologically complex
+			language should be classifed as 'Language Description' if the primary purpose is to
+			describe the structure of the language in question. Use of the Library of Congress
+			Subject Heading "Morphophonemics" is deprecated.</skos:scopeNote>
+		<skos:example>A paper on morphological theory, Word Grammar (Hudson).</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#neurolinguistics">
+		<skos:prefLabel>Neurolinguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of brain structure and the physical representation of language
+			in the brain. </skos:definition>
+		<skos:scopeNote>The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>A study of brain damage with respect to language impairment, a study of the
+			neurological development of the brain during first language acquisition. The latter
+			should also be classified as Language Acquisition.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#philosophy_of_language">
+		<skos:prefLabel>Philosophy of Language</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition>The application of philosophy to language and linguistic
+			theory.</skos:definition>
+		<skos:scopeNote>The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>A paper on the Sapir-Whorf hypothesis, a comparative study of verbal and
+			non-verbal thought.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#phonetics">
+		<skos:prefLabel>Phonetics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study and classification of the structure, articulation and perception
+			of speech sounds. </skos:definition>
+		<skos:scopeNote>The definition includes both articulatory phonetics and acoustic phonetics.
+			Datasets, lexicons, and graphic representations of experimental results should be
+			classified under Phonetics if they have particular relevance to the sounds of the
+			language. The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>A sound inventory of a language, a study of the variation of articulation of a
+			particular sound.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#phonology">
+		<skos:prefLabel>Phonology</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the patterns and principles behind the sound system of a
+			language, or languages in general. </skos:definition>
+		<skos:scopeNote>The classification is not limited to phonological analyses. Datasets,
+			lexicons, and graphic representations of experimental results should be classified under
+			Phonology if they have particular relevance to the sound system of the language. Use of
+			the Library of Congress subject heading "Morphophonemics" is
+			deprecated.</skos:scopeNote>
+		<skos:example>Phonological theories applied to a particular language; that is, a study of
+			the syllable structure of a language, or the rules behind sound alternations. Also to be
+			included under 'Phonology' are phoneme datasets, field notes on the phonology of a
+			language, and papers on phonological theories themselves, such as a critique of
+			Optimality Theory.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#pragmatics">
+		<skos:prefLabel>Pragmatics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the use of language in terms of the context in which it is
+			spoken. </skos:definition>
+		<skos:scopeNote>The definition includes Non-verbal Communication. The category is equivalent
+			to the Library of Congress subject heading of the same name.</skos:scopeNote>
+		<skos:example>A study of politeness phenomena, honorifics, deixis or speech
+			acts.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#psycholinguistics">
+		<skos:prefLabel>Psycholinguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The application of psychology to linguistics, in terms of the
+			psychological mechanisms behind language, such as memory and intelligence (Experimental
+			Psycholinguistics). </skos:definition>
+		<skos:scopeNote>The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>A cross-linguistic study of acquisition of a particular syntactic constraint,
+			a study of aphasic children's language development.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#semantics">
+		<skos:prefLabel>Semantics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the meaning of linguistic structures. </skos:definition>
+		<skos:scopeNote>The study of meaning in conversation should be classified as Discourse
+			Analysis and not Semantics. The Linguistic Field of Semantics includes meaning at the
+			word level ('lexical semantics'). The category is equivalent to the Library of Congress
+			subject heading of the same name.</skos:scopeNote>
+		<skos:example>A paper on a semantic theory, such as Truth Conditional Semantics. A paper on
+			color lexemes in a particular language.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#sociolinguistics">
+		<skos:prefLabel>Sociolinguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of language in context of the society that speaks it. </skos:definition>
+		<skos:scopeNote>Multilingualism, Folklore, Pidgins and Creoles, Dialectology, Language
+			Planning, and Gender Studies should all be classified under 'Sociolinguistics'. The
+			category is equivalent to the Library of Congress subject heading of the same
+			name.</skos:scopeNote>
+		<skos:example>A study of language variation according to such factors as the speakers'
+			gender, age, and/or social class.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#syntax">
+		<skos:prefLabel>Syntax</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> 'The study of grammatical relations between words and other units within a
+			sentence' (Concise Oxford Dictionary of Linguistics). To be distinguished from
+			morphology, which applies to units smaller than the word. </skos:definition>
+		<skos:scopeNote>The category is equivalent to the Library of Congress subject heading of the
+			same name.</skos:scopeNote>
+		<skos:example>A syntactic description of a language, using a particular syntactic theory. A
+			paper using language data to criticize a syntactic theory.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#text_and_corpus_linguistics">
+		<skos:prefLabel>Text and Corpus Linguistics</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the linguistic properties of an extended passage, text, or
+			corpus of texts. </skos:definition>
+		<skos:scopeNote>The definition includes Semiotics and Genre Analysis, as well as the
+			computational analysis of text corpora.</skos:scopeNote>
+		<skos:example>A statistical analysis of the British National Corpus, on the use of modal
+			verbs in spoken and written English.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#translating_and_interpreting">
+		<skos:prefLabel>Translating and Interpreting</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the act of converting one language into another, either via
+			speech or writing. </skos:definition>
+		<skos:scopeNote>The definition includes theoretical discussions of the best translation and
+			interpreting methods, and practical aids to interpreting languages. The translated text
+			itself may be better classified under 'Language Description' if the purpose of the
+			translation is to exemplify the structure of a language. The category is equivalent to
+			the Library of Congress subject heading of the same name.</skos:scopeNote>
+		<skos:example>A study of the relative merits of different levels of translation (that is,
+			literal translation, word-for-word translation and so on).</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#typology">
+		<skos:prefLabel>Typology</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The study of the similarites and differences between languages, regardless
+			of any genetic relation, and the resulting categorization of language into 'types'. </skos:definition>
+		<skos:scopeNote>The definition includes the descriptive and comparative study of Universals.
+			The category is equivalent to the Library of Congress subject heading of the same
+			name.</skos:scopeNote>
+		<skos:example>A paper using data from multiple languages as an argument for or against
+			Universal Grammar. An analysis of a poorly documented language in terms of Greenberg's
+			Universals.</skos:example>
+	</skos:Concept>
+	<skos:Concept rdf:about="#writing_systems">
+		<skos:prefLabel>Writing Systems</skos:prefLabel>
+		<skos:inScheme rdf:resource="http://www.language-archives.org/vocabulary/field"/>
+		<skos:definition> The visual representation of spoken language on paper or other media, and
+			the issues involved in writing and creating a writing system. </skos:definition>
+		<skos:scopeNote>Resources dealing with literacy may be classified as Writing Systems or
+			Applied Linguistics or both, depending on whether the resource has substantial pedagogic
+			content (Applied Linguistics) or includes an analysis of the graphemic system per se
+			(Writing Systems). The category is equivalent to the Library of Congress subject heading
+			of the same name.</skos:scopeNote>
+		<skos:example>A paper examining issues in a linguist's development of a writing system for a
+			previously unwritten language. An examination of pictographic writing systems. A book on
+			the decipherment of Linear B.</skos:example>
+	</skos:Concept>
+</rdf:RDF>
