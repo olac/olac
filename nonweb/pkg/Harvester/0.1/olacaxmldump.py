@@ -49,7 +49,7 @@ conn = None     # db connection
 csr = None      # cursor 1
 csr2 = None     # cursor 2
 extdb = None    # extension db
-dctagmap = None # dc tag map
+dctags = None # dc tag map
 myopts = {}     # mysql connection info
 lrfile = None   # path for ListRecords.gz
 spdir = None    # dir for static pages
@@ -181,18 +181,11 @@ def get_extension_db():
     return extdb
 
 def get_dctag_map():
-    sql = """
-    select e1.TagName, e2.TagName
-    from   ELEMENT_DEFN e1, ELEMENT_DEFN e2
-    where  e1.DcElement = e2.Tag_ID
-    """
-
-    dctagmap = {}
-    csr.execute(sql)
-    for k,v in csr.fetchall():
-        dctagmap[k] = v
-
-    return dctagmap
+    return set([
+        "any", "title", "creator", "subject", "description", "publisher",
+        "contributor", "date", "type", "format", "identifier", "source",
+        "language", "relation", "coverage", "rights"
+        ])
 
 
 def create_db():
@@ -227,7 +220,7 @@ def create_db():
     sqlite.wait()
 
 def init():
-    global doc, conn, csr, csr2, extdb, dctagmap
+    global doc, conn, csr, csr2, extdb, dctags
 
     # get mysql options file, ListRecords dir, static pages dir
     process_cmdline_options()
@@ -289,7 +282,7 @@ def init():
     for sql in init_sqls:
         csr.execute(sql)
 
-    dctagmap = get_dctag_map()
+    dctags = get_dctag_map()
     extdb = get_extension_db()
 
     
@@ -324,7 +317,7 @@ def get_metadata_element(row, nsinfo):
     extid = row[3]
     code = row[4]
 
-    if tag in dctagmap:
+    if tag in dctags:
         me = doc.createElement("dc:%s" % tag)
     else:
         me = doc.createElement("dcterms:%s" % tag)
