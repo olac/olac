@@ -12,12 +12,20 @@
       * first edition
           
 -->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:olac11="http://www.language-archives.org/OLAC/1.1/" xmlns:olac10="http://www.language-archives.org/OLAC/1.0/">
+<xsl:stylesheet version="1.0" 
+	xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/" 
+	xmlns:dcterms="http://purl.org/dc/terms/" 
+	xmlns:olac11="http://www.language-archives.org/OLAC/1.1/" 
+	xmlns:olac10="http://www.language-archives.org/OLAC/1.0/"
+	xmlns:oai="http://www.openarchives.org/OAI/2.0/">
 	<xsl:output method="html" version="4.0"/>
-	<xsl:template match="/record/header">
+	<xsl:template match="/oai:record/oai:header">
 		<!-- do nothing -->
 	</xsl:template>
-	<xsl:template match="/record/metadata/olac11:olac|/record/metadata/olac10:olac">
+	<xsl:template match="/oai:record/oai:metadata/olac11:olac|/oai:record/oai:metadata/olac10:olac">
 		<xsl:variable name="title">
 			<xsl:choose>
 				<xsl:when test="dc:title|dcterms:alternative">
@@ -45,11 +53,11 @@
 					<tr><td></td><td></td></tr>
 					<tr>
 						<td bgcolor="silver"><b>&#160;OAI Identifier&#160;</b></td>
-						<td bgcolor="#f0f0f0"><xsl:value-of select="/record/header/identifier"/></td>
+						<td bgcolor="#f0f0f0"><xsl:value-of select="/oai:record/oai:header/oai:identifier"/></td>
 					</tr>
 					<tr>
 						<td bgcolor="silver"><b>&#160;Datestamp&#160;</b></td>
-						<td bgcolor="#f0f0f0"><xsl:value-of select="/record/header/datestamp"/></td>
+						<td bgcolor="#f0f0f0"><xsl:value-of select="/oai:record/oai:header/oai:datestamp"/></td>
 					</tr>
 				</table>
 				<hr style="color: black"/>
@@ -65,7 +73,7 @@
 			</body>
 		</html>
 	</xsl:template>
-	<xsl:template match="/record/metadata/olac11:olac/*|/record/metadata/olac10:olac/*">
+	<xsl:template match="/oai:record/oai:metadata/olac11:olac/*|/oai:record/oai:metadata/olac10:olac/*">
 		<xsl:variable name="tag">
 			<xsl:choose>
 				<xsl:when test="contains(name(),':')">
