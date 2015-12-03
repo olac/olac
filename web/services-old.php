@@ -1,3 +1,74 @@
+<?php
+
+require_once("lib/php/OLACDB.php");
+$DB = new OLACDB();
+
+############################################################
+#
+# returns a table of the following form:
+#
+#    | service | institution | contact | description
+# ---+---------+-------------+---------+-------------
+#  0 |         |             |         |
+#  1 |         |             |         |
+# ...|         |             |         |
+#
+############################################################
+function get_service_table()
+{
+  global $DB;
+
+  $tab = $DB->sql("select * from SERVICES
+  		   where dateApproved is not NULL
+                   order by serviceName");
+
+  if ($DB->saw_error()) {
+    echo "<p>" . $DB->get_error_message() . "</p>\n";
+    echo "<p>" . $DB->get_error_sql() . "</p>\n";
+  }
+  if ($tab) foreach ($tab as $row) {
+    $x[service] = "<a href=\"$row[serviceURL]\">$row[serviceName]</a>";
+    $i = $row[institution];
+    $iu = $row[institutionURL];
+    if ($i) {
+      if ($iu) $x[institution] = "<a href=\"$iu\">$i</a>";
+      else     $x[institution] = $i;
+    } else if ($iu) {
+               $x[institution] = "<a href=\"$iu\">$iu</a>";
+    } else     $x[institution] = "";
+
+    $cp = $row[contactPerson];
+    $ce = str_replace('', 'mailto:', $row[contactEmail]);
+    if ($cp) {
+      if ($ce) $x[contact] = "<a href=\"mailto:$ce\">$cp</a>";
+      else     $x[contact] = $cp;
+    } else if ($ce) {
+               $x[contact] = "<a href=\"mailto:$ce\">$ce</a>";
+    } else     $x[contact] = "";
+
+    if ($row[description])
+      $x[description] = $row[description];
+    else
+      $x[desctiption] = $row[description];
+    $result[] = $x;
+  }
+  return $result;
+}
+
+function get_service_count()
+{
+  global $DB;
+
+  $tab = $DB->sql("select count(Service_ID) as size
+                   from   SERVICES
+                   where  dateApproved is not NULL");
+  if ($DB->saw_error()) {
+    echo "<p>" . $DB->get_error_message() . "</p>\n";
+    echo "<p>" . $DB->get_error_sql() . "</p>\n";
+  }
+  return $tab[0][size];
+}
+?>
 <html>
 <head>
 <title>Open Language Archives Community</title>
@@ -71,6 +142,44 @@ vocabulary; linguistics; linguistic data; language data">
 <tr><td width=100%>
 
 
+<h2>Registered Services</h2>
+
+<p>The following services permit end-users to access OLAC metadata.
+Information about registering a new
+service is posted on this site:
+
+<p>
+<li> <a href="register/service.html">Register a service</a>
+
+<p>
+
+<?php
+$tab = get_service_table();
+?>
+
+<?php if ($tab): ?>
+	<p>
+	<table>
+	<tr><th>Service</th>
+	    <th>Institution</th>
+	    <th>Contact</th>
+	    <th>Description</th></tr>
+
+	<?php
+	foreach ($tab as $row) {
+	  echo "<tr>";
+	  echo "<td>$row[service]</td>";
+	  echo "<td>$row[institution]</td>";
+	  echo "<td>$row[contact]</td>";
+	  echo "<td>$row[description]</td>";
+	  ECHO "</tr>";
+	}
+	?>
+	</table>
+<?php endif; ?>
+
+<hr>
+
 <h2>OLAC Infrastructure Services</h2>
 
 <p>The following services support the operation of OLAC.
@@ -79,6 +188,9 @@ vocabulary; linguistics; linguistic data; language data">
 <tr valign=top>
 <tr><td><a href="/register/register.php">Archive Registration</a></td>
 <td>A service for validating and registering OLAC archives.</td></tr>
+
+<tr><td><a href="/register/service.html">Service Registration</a></td>
+<td>A service for registering end-user services based on OLAC metadata.</td></tr>
 
 <tr><td><a href="/tools/metadata/freestanding.html">Freestanding Metadata</a></td>
 <td>A service for validating and formatting an OLAC metadata record.</td></tr>
