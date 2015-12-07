@@ -356,6 +356,8 @@ def get_record_container(row):
     h.appendChild(d)
     r.appendChild(m)
 
+    r.setAttribute('xmlns', 'http://www.openarchives.org/OAI/2.0/')
+
     return r, m
 
 
@@ -391,6 +393,8 @@ def main():
             me = get_metadata_element(mdata, nsinfo)
             olac.appendChild(me)
         schemaloc = []
+        if 'http://www.language-archives.org/OLAC/1.1/' not in nsinfo and 'http://www.language-archives.org/OLAC/1.0/' not in nsinfo:
+            nsinfo['http://www.language-archives.org/OLAC/1.1/'] = ('olac', 'http://www.language-archives.org/OLAC/1.1/olac.xsd')
         for ns, (nsprefix, nsschema) in nsinfo.items():
             olac.setAttribute("xmlns:%s" % nsprefix, ns)
             schemaloc.append(ns)
