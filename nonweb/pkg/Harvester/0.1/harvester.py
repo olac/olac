@@ -1109,15 +1109,14 @@ def set_hfc(con, archiveid):
         cur.close()
 
 
-def mark_success(con, archiveid):
+def mark_success(con, archiveid, date):
     """
     Set LastHarvested date and clear HFC error.
     """
     if archiveid:
         cur = con.cursor()
         sql = "update OLAC_ARCHIVE set LastHarvested=%s where Archive_ID=%s"
-        now = datetime.datetime.now().date()
-        cur.execute(sql, (now, archiveid))
+        cur.execute(sql, (date, archiveid))
         sql = "delete from INTEGRITY_CHECK where Object_ID=%s and Problem_Code='HFC'"
         cur.execute(sql, archiveid)
         cur.close()
@@ -1159,9 +1158,10 @@ def harvest(url, con, full=False, stream_filter=None, static=False):
         else:
             h = Harvester(url, dbi, full, stream_filter)
         cur = con.cursor()
+        now = datetime.datetime.now().date()
         if h.harvest():
             h.log("harvest successful")
-            mark_success(con, dbi.archiveId())
+            mark_success(con, dbi.archiveId(), now)
             if static:
                 archiveid = dbi.archiveId()
                 if archiveid is not None:
@@ -1246,7 +1246,8 @@ def harvest_single(url,
                 harvest(url, con, full, stream_filter, static)
             else:
                 logger.log("assume no changes to harvest")
-                mark_success(con, archiveid)
+                now = datetime.datetime.now().date()
+                mark_success(con, archiveid, now)
                 con.commit()
         cur.close()
     else:
