@@ -14,7 +14,8 @@ RUN apk --update add apache2 php-apache2 php-mysql python mariadb py-mysqldb py-
     mkdir /usr/share/pear && \
     mkdir /run/mysqld && \
     chown mysql.mysql /run/mysqld && \
-    ln -s /run/mysqld /var/run/mysqld
+    ln -s /run/mysqld /var/run/mysqld && \
+    echo "local0.debug /var/log/olac.log" > /etc/syslog.conf
 
 COPY olacbase /etc
 COPY olacvar /bin
