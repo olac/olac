@@ -9,6 +9,7 @@ import subprocess
 import threading
 import time
 import datetime
+import dateutil.parser
 import tempfile
 import MySQLdb
 import pycurl
@@ -177,12 +178,12 @@ class DBI(Logger):
             archiveid = self.cur.lastrowid
 
         sql = "select Name,Role,Email from ARCHIVE_PARTICIPANT where Archive_ID=%s"
-        self.cur.execute(sql, archiveid)
+        self.cur.execute(sql, (archiveid,))
         L = sorted(self.cur.fetchall())
         M = sorted([tuple(r) for r in record['participants']])
         if L != M:
             sql = "delete from ARCHIVE_PARTICIPANT where Archive_ID=%s"
-            self.cur.execute(sql, archiveid)
+            self.cur.execute(sql, (archiveid,))
             sql = "insert ignore into ARCHIVE_PARTICIPANT values (%s,%s,%s,%s)"
             for name, role, email in M:
                 self.cur.execute(sql, (archiveid, name, role, email))
@@ -216,7 +217,7 @@ class DBI(Logger):
 
         sql = "select Item_ID,DateStamp from ARCHIVED_ITEM where OaiIdentifier=%s"
         oaiid = record.oaiId()
-        self.cur.execute(sql, oaiid)
+        self.cur.execute(sql, (oaiid,))
         flagUpdateMetadata = False
         if self.cur.rowcount > 0:
             # record with the same id exists
@@ -226,9 +227,9 @@ class DBI(Logger):
             if record.deleted():
                 # --> delete
                 sql = "delete from METADATA_ELEM where Item_ID=%s"
-                self.cur.execute(sql, itemid)
+                self.cur.execute(sql, (itemid,))
                 sql = "delete from ARCHIVED_ITEM where Item_ID=%s"
-                self.cur.execute(sql, itemid)
+                self.cur.execute(sql, (itemid,))
                 self.deletedRecordCount0 += 1
             else:
                 # --> update
@@ -237,13 +238,12 @@ class DBI(Logger):
                       "where Item_ID=%s"
                 args = (oaiid, record.datestamp(), self.archiveid, schemaid, itemid)
                 self.cur.execute(sql, args)
-                dt1 = datetime.datetime(
-                    *[int(x) for x in re.findall(r'\d+', record.datestamp())])
+                dt1 = dateutil.parser.parse(record.datestamp())
                 if self.cur.rowcount > 0 or dt<=dt1.date():
                     self.updatedRecordCount0 += 1
                     flagUpdateMetadata = True
                     sql = "delete from METADATA_ELEM where Item_ID=%s"
-                    self.cur.execute(sql, itemid)
+                    self.cur.execute(sql, (itemid,))
                 else:
                     self.ignoredRecordCount0 += 1
         else:
@@ -331,7 +331,7 @@ class DBI(Logger):
     def lastHarvested(self):
         if self.archiveid is not None:
             sql = "select LastHarvested from OLAC_ARCHIVE where Archive_ID=%s"
-            self.cur.execute(sql, self.archiveid)
+            self.cur.execute(sql, (self.archiveid,))
             return self.cur.fetchone()[0]
         
     def commit(self):
@@ -1103,9 +1103,9 @@ def set_hfc(con, archiveid):
     if archiveid:
         cur = con.cursor()
         sql = "delete from INTEGRITY_CHECK where Object_ID=%s and Problem_Code='HFC'"
-        cur.execute(sql, archiveid)
+        cur.execute(sql, (archiveid,))
         sql = "insert into INTEGRITY_CHECK (Object_ID, Problem_Code) values (%s, 'HFC')"
-        cur.execute(sql, archiveid)
+        cur.execute(sql, (archiveid,))
         cur.close()
 
 
@@ -1118,23 +1118,23 @@ def mark_success(con, archiveid, date):
         sql = "update OLAC_ARCHIVE set LastHarvested=%s where Archive_ID=%s"
         cur.execute(sql, (date, archiveid))
         sql = "delete from INTEGRITY_CHECK where Object_ID=%s and Problem_Code='HFC'"
-        cur.execute(sql, archiveid)
+        cur.execute(sql, (archiveid,))
         cur.close()
 
 
 def do_implicit_deletion(con, archiveid, harvested_ids):
     cur = con.cursor()
     sql = "select OaiIdentifier from ARCHIVED_ITEM where Archive_ID=%s"
-    cur.execute(sql, archiveid)
+    cur.execute(sql, (archiveid,))
     for oaiid, in cur.fetchall():
         if oaiid not in harvested_ids:
             sql = """
             delete me.* from ARCHIVED_ITEM ai, METADATA_ELEM me
             where ai.OaiIdentifier=%s and ai.Item_ID=me.Item_ID
             """
-            cur.execute(sql, oaiid)
+            cur.execute(sql, (oaiid,))
             sql = "delete from ARCHIVED_ITEM where OaiIdentifier=%s"
-            cur.execute(sql, oaiid)
+            cur.execute(sql, (oaiid,))
     cur.close()
 
 
@@ -1172,7 +1172,7 @@ def harvest(url, con, full=False, stream_filter=None, static=False):
             # processed identify response
             archiveid = dbi.archiveId()
             if archiveid is None:
-                cur.execute("select Archive_ID from OLAC_ARCHIVE where BaseURL=%s", url)
+                cur.execute("select Archive_ID from OLAC_ARCHIVE where BaseURL=%s", (url,))
                 if cur.rowcount > 0:
                     archiveid = cur.fetchone()[0]
             if archiveid:
@@ -1220,7 +1220,7 @@ def harvest_single(url,
     if static:
         cur = con.cursor()
         sql = "select Archive_ID, LastHarvested from OLAC_ARCHIVE where BaseURL=%s"
-        cur.execute(sql, url)
+        cur.execute(sql, (url,))
         if cur.rowcount > 0:
             archiveid, last_harvested = cur.fetchone()
 
