@@ -6,7 +6,7 @@ WORKDIR /olac
 VOLUME /olac
 VOLUME /db
 
-RUN apk --update add apache2 php-apache2 php-mysql python mariadb py-mysqldb py-curl py-dateutil && \
+RUN apk --update add apache2 php-apache2 php-mysql python mariadb py-mysqldb py-curl py-dateutil py-openssl && \
     rm -f /var/cache/apk/* && \
     mkdir /run/apache2 && \
     sed -i 's@/var/www/localhost/htdocs@/olac/web@' /etc/apache2/httpd.conf && \
