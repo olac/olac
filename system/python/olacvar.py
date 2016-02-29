@@ -7,7 +7,7 @@ __all__ = ['olacvar']
 def read_config_line(filename):
     if os.access(filename, os.R_OK):
         for line in open(filename):
-            if ((not line.startswith('#')) and line.strip()):
+            if not line.startswith('#'):
                 return line.strip()
 
     return '/null/value'
@@ -56,7 +56,7 @@ def olacvar(varname = None, interpret = True):
                         q = final = []
                         j = (max(s.rfind(' '), s.rfind('\t')) + 1)
                         q.append(s[:j])
-                        q.append(os.path.join(olachome, 'svn/nonweb/pkg', s[j:], 'Current'))
+                        q.append(os.path.join(olachome, 'nonweb/pkg', s[j:], 'Current'))
                         q.append('/')
                         i += 1
                         continue

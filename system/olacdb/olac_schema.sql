@@ -93,12 +93,12 @@ create table SCHEMA_VERSION (
 	SchemaURL		varchar(255) not null
 ) engine=innodb, charset=utf8;
 
-insert into SCHEMA_VERSION values ('',
+insert into SCHEMA_VERSION values (null,
   '1.0',
   'http://www.language-archives.org/OLAC/1.0/',
   'http://www.language-archives.org/OLAC/1.0/olac.xsd');
 
-insert into SCHEMA_VERSION values('',
+insert into SCHEMA_VERSION values(null,
   '1.1',
   'http://www.language-archives.org/OLAC/1.1/',
   'http://www.language-archives.org/OLAC/1.1/olac.xsd');
