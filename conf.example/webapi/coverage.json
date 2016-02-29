@@ -1,0 +1,3 @@
+# desc: JSON script for OLAC coverage.
+# desc: Pre-computed AJAX function call.
+JsonScripts!coverage.py

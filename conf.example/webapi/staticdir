@@ -1,0 +1,3 @@
+# desc: Root directory for static web services.
+# desc: Static web services are static JSON files.
+${docroot}/static/data_source

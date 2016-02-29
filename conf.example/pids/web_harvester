@@ -1,0 +1,2 @@
+# desc: Path of the PID file for the web version of the OLAC harvester.
+/tmp/olac.harvester.web.pid

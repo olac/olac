@@ -1,0 +1,2 @@
+# desc: A script that generates static html files out of PHP pages.
+StaticPages!make_static_pages.py
