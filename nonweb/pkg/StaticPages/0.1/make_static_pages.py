@@ -134,7 +134,14 @@ def proc1cite(param_list):
 def main():
     tbeg = datetime.datetime.now()
 
-    status_data = {}
+    if not os.path.exists(STATICROOT):
+        os.makedirs(STATICROOT)
+    if not os.path.exists(os.path.dirname(STATICSTATUS)):
+        os.makedirs(os.path.dirname(STATICSTATUS))
+    if not os.path.exists(STATICSTATUS):
+        open(STATICSTATUS, "w").close()
+
+    status_data = {"STARTED": "1900-01-01 00:00:00"}
     for line in open(STATICSTATUS):
         try:
             a = line.strip().split(': ')

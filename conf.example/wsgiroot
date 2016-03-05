@@ -1,2 +1,2 @@
 # desc: WSGI directory.
-^/olac/nonweb/wsgi
+^/nonweb/wsgi

@@ -66,7 +66,7 @@ def get_citation(cur, oaiid):
     select * from ARCHIVED_ITEM ai, METADATA_ELEM me
     where ai.OaiIdentifier=%s and ai.Item_ID=me.Item_ID
     """
-    cur.execute(sql, oaiid)
+    cur.execute(sql, (oaiid,))
     if cur.rowcount == 0: return
 
     data = cur.fetchall()
@@ -80,7 +80,7 @@ def get_citation(cur, oaiid):
         select * from OLAC_ARCHIVE oa, ARCHIVED_ITEM ai
         where ai.OaiIdentifier=%s and ai.Archive_ID=oa.Archive_ID
         """
-        cur.execute(sql, oaiid)
+        cur.execute(sql, (oaiid,))
         publisher = cur.fetchone()['RepositoryName']
 
     if authors[-1] == '.':

@@ -42,7 +42,7 @@ to be displayed.  It may be slow for large archives.
 To find particular records in OLAC archives, please use
 the <a href="/search/">OLAC search interface</a>.
 
-<?
+<?php
 function table_sort($row1, $row2)
 {
   $name1 = $row1['RepositoryName'];
