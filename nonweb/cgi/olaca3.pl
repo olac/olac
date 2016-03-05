@@ -1,4 +1,4 @@
-#! /usr/bin/perl -I/olac/olac/nonweb/cgi/olac_suite/4
+#! /usr/bin/perl -I/olac/olac/nonweb/cgi/olac_suite/4 -I/olac/nonweb/cgi/olac_suite/4
 
 use OLAC::Aggregator;
 
