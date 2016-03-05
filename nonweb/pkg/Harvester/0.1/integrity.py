@@ -245,7 +245,7 @@ def check_urls(con, archive_id=None):
     if archive_id is None:
         cur.execute("select me.Element_ID, Content from METADATA_ELEM me left join INTEGRITY_CHECK ic on me.Element_ID=ic.Object_ID where Content regexp '(f|ht)tps?://.*' and (IntegrityChecked is null or timestampdiff(day,IntegrityChecked,now())>1) order by rand()")
     else:
-        cur.execute("select me.Element_ID, Content from METADATA_ELEM me left join ARCHIVED_ITEM ai on me.Item_ID=ai.Item_ID left join INTEGRITY_CHECK ic on me.Element_ID=ic.Object_ID where ai.Archive_ID=%s and Content regexp '(f|ht)tps?://.*' and (IntegrityChecked is null or timestampdiff(day,IntegrityChecked,now())>1) order by rand()", archive_id)
+        cur.execute("select me.Element_ID, Content from METADATA_ELEM me left join ARCHIVED_ITEM ai on me.Item_ID=ai.Item_ID left join INTEGRITY_CHECK ic on me.Element_ID=ic.Object_ID where ai.Archive_ID=%s and Content regexp '(f|ht)tps?://.*' and (IntegrityChecked is null or timestampdiff(day,IntegrityChecked,now())>1) order by rand()", (archive_id,))
     for row in cur.fetchall():
         url = pat.search(row[1]).group(1)
         log('checking: %s' % url)
@@ -654,7 +654,7 @@ def check_static_repository(con, archive_id=None):
     if archive_id is None:
         cur.execute("select oa.Archive_ID, a.type, a.BASEURL from ARCHIVES a, OLAC_ARCHIVE oa where a.ID=oa.RepositoryIdentifier and a.BASEURL=oa.BaseUrl")
     else:
-        cur.execute("select oa.Archive_ID, a.type, a.BASEURL from ARCHIVES a, OLAC_ARCHIVE oa where a.ID=oa.RepositoryIdentifier and a.BASEURL=oa.BaseUrl and oa.Archive_ID=%s", archive_id)
+        cur.execute("select oa.Archive_ID, a.type, a.BASEURL from ARCHIVES a, OLAC_ARCHIVE oa where a.ID=oa.RepositoryIdentifier and a.BASEURL=oa.BaseUrl and oa.Archive_ID=%s", (archive_id,))
     for row in cur.fetchall():
         archive_id, repo_type, baseurl = row
         if repo_type == 'Gateway':
@@ -663,7 +663,7 @@ def check_static_repository(con, archive_id=None):
             baseurl += "?verb=Identify"
         log('checking: %s' % baseurl)
         sql = "delete from INTEGRITY_CHECK where Object_ID=%s and Problem_Code='BRU'"
-        cur.execute(sql, archive_id)
+        cur.execute(sql, (archive_id,))
         try:
             res = http_check(baseurl)
         except Exception, e:
@@ -671,7 +671,7 @@ def check_static_repository(con, archive_id=None):
             continue  # can't determine
         if res == '404':
             sql = "insert into INTEGRITY_CHECK (Object_ID, Problem_Code) values (%s, 'BRU')"
-            cur.execute(sql, archive_id)
+            cur.execute(sql, (archive_id,))
         con.commit()
     cur.close()
 
@@ -877,7 +877,7 @@ Usage: %(prog)s [-h] -c <mycnf> [-H <host>] [-d <db>] [-a <repoid>] [-u]
     if repoid:
         cur = con.cursor()
         cur.execute("select Archive_ID from OLAC_ARCHIVE " \
-                    "where RepositoryIdentifier=%s", repoid)
+                    "where RepositoryIdentifier=%s", (repoid,))
         if cur.rowcount == 0:
             msg = "archive by the repository ID doesn't exist: %s" % repoid
             log(msg)

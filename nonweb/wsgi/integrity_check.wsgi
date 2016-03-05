@@ -39,7 +39,7 @@ class IntegrityPage:
         select Archive_ID from OLAC_ARCHIVE where RepositoryIdentifier=%s
         """
 
-        self.cur.execute(sql, self.repo_id)
+        self.cur.execute(sql, (self.repo_id,))
         row = self.cur.fetchone()
         if row:
             archive_id = row[0]
@@ -87,7 +87,7 @@ order by ic.Problem_Code
         errors = []
         warnings = []
         for sql in (sql1,sql2,sql3):
-            self.cur.execute(sql, archive_id)
+            self.cur.execute(sql, (archive_id,))
             for row in self.cur:
                 severity = row[2]
                 if severity == 'E':

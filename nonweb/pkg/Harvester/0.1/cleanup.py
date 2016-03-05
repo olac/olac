@@ -16,11 +16,11 @@ def remove_unregistered_archives():
     for aid, in cur.fetchall():
         sql = "delete ai.*, me.* from ARCHIVED_ITEM ai, METADATA_ELEM me " \
               "where ai.Archive_ID=%s and ai.Item_ID=me.Item_ID"
-        cur.execute(sql, aid)
+        cur.execute(sql, (aid,))
         sql = "delete from ARCHIVE_PARTICIPANT where Archive_ID=%s"
-        cur.execute(sql, aid)
+        cur.execute(sql, (aid,))
         sql = "delete from OLAC_ARCHIVE where Archive_ID=%s"
-        cur.execute(sql, aid)
+        cur.execute(sql, (aid,))
 
 def remove_archives_with_no_baseurl():
     sql = "delete oa.*, ai.*, me.* " \

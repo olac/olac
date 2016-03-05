@@ -12,6 +12,7 @@ EOF
 
 fi
 
+syslogd
 mysqld --user=mysql --datadir=/db &
 exec httpd -D FOREGROUND
 
