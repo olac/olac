@@ -153,20 +153,20 @@ Usage: %(prog)s [options] dumpfile static_pages_dir
     lrfile, spdir = op.args
     lrdir = os.path.dirname(lrfile)
     if not os.path.exists(lrdir):
-        parser.error("directory %s doesn't exist" % `lrdir`)
+        usage("directory %s doesn't exist" % `lrdir`)
     if not os.path.exists(spdir):
-        parser.error("directory %s doesn't exist" % `spdir`)
+        usage("directory %s doesn't exist" % `spdir`)
     if os.path.exists(lrfile):
         if not os.path.isfile(lrfile):
-            parser.error("%s is not a file" % `lrfile`)
+            usage("%s is not a file" % `lrfile`)
         elif not os.access(lrfile, os.W_OK):
-            parser.error("file %s is not writable" % `lrfile`)
+            usage("file %s is not writable" % `lrfile`)
     elif not os.access(lrdir, os.W_OK):
-        parser.error("directory %s is not writable" % `lrdir`)
+        usage("directory %s is not writable" % `lrdir`)
     if not os.path.isdir(spdir):
-        parser.error("%s is not a directory" % `spdir`)
+        usage("%s is not a directory" % `spdir`)
     elif not os.access(spdir, os.W_OK):
-        parser.error("directory %s is not writable" % `lrdir`)
+        usage("directory %s is not writable" % `lrdir`)
     
 def get_extension_db():
     sql = """
@@ -201,7 +201,7 @@ def create_db():
         cmd.append('-u')
         cmd.append(myopts['user'])
     if 'passwd' in myopts:
-        cmd.append('-p%s' % myopts['passwd'])
+        cmd.append('--password=%s' % myopts['passwd'])
     if 'db' in myopts:
         cmd.append(myopts['db'])
     cmd += ['ARCHIVED_ITEM', 'ELEMENT_DEFN', 'METADATA_ELEM',

@@ -8,16 +8,16 @@ VOLUME /db
 
 RUN apk --update add \
     apache2 apache2-mod-wsgi \
-    mariadb \
+    mariadb mariadb-client \
     php-apache2 php-mysql php-cgi php-json php-gd \
     python py-pip py-mysqldb py-curl py-dateutil py-openssl py-cryptography py-enum34 py-cffi \
     perl perl-libwww perl-dbi perl-xml-parser perl-dbd-mysql \
-    make && \
+    make sqlite && \
     rm -f /var/cache/apk/*
 
 RUN pip install CherryPy
 
-RUN yes | cpan XML::DOM
+RUN yes | cpan XML::DOM && rm -rf $HOME/.cpan
 
 RUN mkdir /run/apache2 && \
     sed -i -r 's/#(LoadModule rewrite_module )/\1/' /etc/apache2/httpd.conf && \
