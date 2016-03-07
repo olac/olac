@@ -9,9 +9,10 @@ VOLUME /db
 RUN apk --update add \
     apache2 apache2-mod-wsgi \
     mariadb mariadb-client \
-    php-apache2 php-mysql php-cgi php-json php-gd \
+    php-apache2 php-mysql php-cgi php-json php-gd php-zip \
     python py-pip py-mysqldb py-curl py-dateutil py-openssl py-cryptography py-enum34 py-cffi \
     perl perl-libwww perl-dbi perl-xml-parser perl-dbd-mysql \
+    openjdk8-jre \
     make sqlite && \
     rm -f /var/cache/apk/*
 
