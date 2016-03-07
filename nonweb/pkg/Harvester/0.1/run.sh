@@ -124,6 +124,12 @@ EOF
 EOF
 
     echo
+    echo "Creating RDF description of each item..."
+    echo
+    rm -f $(olacvar static_records/dir)/rdf.zip
+    find $(olacvar static_records/dir) -name "*.xml" | java -jar $(olacvar batch_xslt) $(olacvar docroot)/OLAC-item-to-LD.xsl $(olacvar static_records/dir)/rdf.zip >/dev/null
+
+    echo
     echo "Creating static HTML pages..."
     echo
     $PYTHON $(olacvar static/generator) >/dev/null
