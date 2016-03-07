@@ -15,8 +15,6 @@ function get_mime_types($accept_string) {
 function get_rdf($item) {
     $cmd = "unzip -p " . olacvar("static_records/dir") . "/rdf.zip '$item.xml'";
     $content = shell_exec($cmd);
-    var_dump($cmd);
-    var_dump($content);
     if ($content === NULL) {
         return FALSE;
     } else {
