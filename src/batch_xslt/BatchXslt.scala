@@ -49,7 +49,7 @@ object BatchXslt {
       try {
         xslt.transform
       } catch {
-        case e: Exception => println("Filed to transform")
+        case e: Exception => println("Failed to transform")
       }
 
       dest.close
