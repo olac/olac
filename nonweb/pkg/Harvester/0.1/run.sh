@@ -128,6 +128,7 @@ EOF
     echo
     rm -f $(olacvar static_records/dir)/rdf.zip
     find $(olacvar static_records/dir) -name "*.xml" | java -jar $(olacvar batch_xslt) $(olacvar docroot)/OLAC-item-to-LD.xsl $(olacvar static_records/dir)/rdf.zip >/dev/null
+    chmod 644 $(olacvar static_records/dir)/rdf.zip
 
     echo
     echo "Creating static HTML pages..."
