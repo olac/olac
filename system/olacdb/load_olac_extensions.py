@@ -116,7 +116,7 @@ Usage: %(prog)s [-h] -c <mycnf> [-H <host>] [-d <db>] -n <ver>
 
         if xsd == 'language':
             sql = "insert into CODE_DEFN select %s, Id, Ref_Name from ISO_639_3"
-            cur.execute(sql, extid)
+            cur.execute(sql, (extid,))
         else:
             for c,l in codes:
                 sql = "insert into CODE_DEFN (Extension_ID,Code,Label) values (%s,%s,%s)"
