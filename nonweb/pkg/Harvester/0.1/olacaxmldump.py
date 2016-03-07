@@ -133,16 +133,16 @@ Usage: %(prog)s [options] dumpfile static_pages_dir
     global myopts, lrfile, spdir, schema
 
     if op.get('-c'):
-        myopts['read_default_file'] = op.getOne('-c')
+        myopts['read_defaults_file'] = op.getOne('-c')
     elif olac:
         myopts['host'] = olac.olacvar('mysql/host')
         myopts['db'] = olac.olacvar('mysql/olacdb')
         myopts['user'] = olac.olacvar('mysql/user')
         myopts['passwd'] = olac.olacvar('mysql/passwd')
     if op.get('-H'):
-        myopts['host'] = opt.getOne('-H')
+        myopts['host'] = op.getOne('-H')
     if op.get('-d'):
-        myopts['db'] = opt.getOne('-d')
+        myopts['db'] = op.getOne('-d')
     if op.get('-s'):
         schema = op.getOne('-s')
     elif olac:
