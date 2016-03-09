@@ -131,6 +131,11 @@ EOF
     chmod 644 $(olacvar static_records/dir)/rdf.zip
 
     echo
+    echo "Creating RDF description of each archive..."
+    echo
+    $(dirname $(olacvar harvester/main))/make_archive_rdfs.sh
+
+    echo
     echo "Creating static HTML pages..."
     echo
     $PYTHON $(olacvar static/generator) >/dev/null

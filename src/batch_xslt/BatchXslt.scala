@@ -40,6 +40,7 @@ object BatchXslt {
       val xml = new FileInputStream(xmlFile)
 
       val path = fs.getPath(xmlFile.getName)
+      Files.deleteIfExists(path)
       val out = Files.newOutputStream(path)
       val dest = proc.newSerializer(out)
 

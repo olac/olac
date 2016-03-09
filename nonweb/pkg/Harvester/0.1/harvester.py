@@ -1001,7 +1001,7 @@ class HarvesterBase(Logger):
             self.log("http error %s; continue nevertheless" % code)
             #raise StopFetching()
 
-    def _download(self, handler, url, retry):
+    def _download(self, handler, url, retry, saver=None):
         self.log("downloading the url...")
         dat = Data()
         curl = MyCurl(dat.write, self._httpStatus, dat.reset)
@@ -1023,6 +1023,8 @@ class HarvesterBase(Logger):
         try:
             ret = parser.feed(dat.dump())
             ret2 = parser.close()
+            if saver is not None:
+                saver(dat.dump())
             if ret == -1 or ret2 == False:
                 self.log("xml parse error has occurred")
                 return False
@@ -1049,7 +1051,7 @@ class Harvester(HarvesterBase):
         handler = IdentifyHandler(self.handler.processIdentify)
         url = request.Identify()
         self.log("fetching and processing: %s" % url)
-        if not self._download(handler, url, 2):
+        if not self._download(handler, url, 2, keep_download):
             return False
         if handler.error:
             if 'message' in handler.error:
@@ -1090,10 +1092,19 @@ class SrHarvester(HarvesterBase):
         self.log("harvester running on %s" % os.uname()[1])
         self.log("harvesting from %s" % self.url)
         handler = SrHandler(self.handler, self.fullHarvest)
-        if not self._download(handler, self.url, 1):
+        if not self._download(handler, self.url, 1, keep_download):
             return False
         self.recordOaiIds = handler.recordids
         return True
+
+
+def keep_download(data):
+    directory = os.path.join(olac.olacvar('static/root'), 'identify_downloads')
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    fd, path = tempfile.mkstemp(dir=directory, prefix="")
+    os.write(fd, data)
+    os.close(fd)
 
 
 def set_hfc(con, archiveid):

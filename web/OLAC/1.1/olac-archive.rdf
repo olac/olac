@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rdf:RDF xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#" 
+    xmlns:dcam="http://purl.org/dc/dcam/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#">
+        <dcterms:title xml:lang="en">OLAC Archive Description, Version 1.1</dcterms:title>
+        <dcterms:publisher rdf:resource="http://www.language-archives.org"/>
+        <dcterms:description rdf:resource="http://www.language-archives.org/OLAC/repositories.html#OLAC%20archive%20description"/>
+        <dcterms:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+            >22008-04-19</dcterms:modified>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#archiveURL">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Archive URL</rdfs:label>
+        <rdfs:comment xml:lang="en">The home page of the archive on the web.</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#institution">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Institution</rdfs:label>
+        <rdfs:comment xml:lang="en">The name of the sponsoring institution (for an institutional archive) or the institution of affiliation (for a personal archive). If the curator of a personal archive has no affiliation, then a value of Unaffiliated should be given.</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#institutionURL">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Institution URL</rdfs:label>
+        <rdfs:comment xml:lang="en">The home page of the institution on the web.</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#shortLocation">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Short Location</rdfs:label>
+        <rdfs:comment xml:lang="en">A brief statement (not to exceed 50 characters) of the location of the institution or the person providing the metadata following the format "City, Country". Multiple locations may be connected with "and".</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#location">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Location</rdfs:label>
+        <rdfs:comment xml:lang="en">A single paragraph describing where an archive that houses a collection of physical holdings is located (for instance, include building name, room number, street address). Other information relevant to visiting the collection, such as opening hours or restrictions on access, may also be described. If the archive is purely an on-line repository, do not use this property.</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#synopsis">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Synopsis</rdfs:label>
+        <rdfs:comment xml:lang="en">A single paragraph summarizing the purpose, scope, coverage, and so on of the archive.</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#access">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Access</rdfs:label>
+        <rdfs:comment xml:lang="en">A single paragraph summarizing terms of access to the materials described in the metadata repository. The statement can describe restrictions on access, licensing requirements, costs, and so on. Individual metadata records should use the dc:rights property to document such things for particular archive holdings. The purpose of this property is to broadly characterize the entire archive.</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://www.language-archives.org/OLAC/1.1/olac-archive#archivalSubmissionPolicy">
+        <rdfs:isDefinedBy rdf:resource="http://www.language-archives.org/OLAC/1.1/olac-archive#"/>
+        <rdfs:label xml:lang="en">Archival Submission Policy</rdfs:label>
+        <rdfs:comment xml:lang="en">A single paragraph describing the institution's policy toward accepting archival submissions. The presence of this element indicates that the repository is an archive that accepts submissions of materials for long-term preservation. The element content should describe the collection policy of the archive (e.g., what kinds of materials are accepted from whom under what terms) so that a person looking for a place to archive a set of language resources may determine whether it would be appropriate to contact the curator about making a submission.</rdfs:comment>
+        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    </rdf:Description>
+</rdf:RDF>
