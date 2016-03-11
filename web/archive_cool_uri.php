@@ -45,7 +45,7 @@ function respond($item) {
         header($_SERVER["SERVER_PROTOCOL"] . " 404 Not Found");
         echo "404 Not Found\n";
     } else {
-        header(header);
+        header($header);
         print($content);
     }
 }
