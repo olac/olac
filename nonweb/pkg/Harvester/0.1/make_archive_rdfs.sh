@@ -5,7 +5,7 @@ set -e
 target=$(olacvar static/root)/archive/rdf.zip
 
 grep -m1 'repositoryIdentifier\s*>' $(olacvar static/root)/identify_downloads/* |
-    sed -r -e 's@</.*@@' -e 's@<.*>@@' -e 's/:\s+/ /' | sort -u |
+    sed -r 's@:.*repositoryIdentifier\s*>(.*)<.*repositoryIdentifier\s*>.*@ \1@' | sort -u |
     while read a b; do
         g=`dirname $a`/$b.xml
         mv $a $g
