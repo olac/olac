@@ -107,6 +107,7 @@ if [ ${new_records:-0} -gt 0 -o "$1" = "MONTHLY" -o -f "$(olacvar dirty)" ]; the
     dumpnam=$XMLDUMPDIR/ListRecords-`date +%Y%m%d`.xml.gz
     $PYTHON $(olacvar xmldump) $dumpnam $SRECDIR 2>/dev/null
     ln -sf $dumpnam $XMLDUMPDIR/ListRecords.xml.gz
+    find $XMLDUMPDIR -name "ListRecords-*.xml.gz" | sort -r | sed -n '29,$p' | xargs -Ix rm -v x
     cat > $SRECDIR/index.html <<EOF
 <html>
 <head>
