@@ -51,12 +51,7 @@ function respond($item) {
 }
 
 function get_item_id() {
-    $a = split("/", $_SERVER["PATH_INFO"]);
-    if (count($a) != 2) {
-        return null;
-    } else {
-        return $a[1];
-    }
+    return substr($_SERVER["PATH_INFO"], 1);
 }
 
 $item = get_item_id();
