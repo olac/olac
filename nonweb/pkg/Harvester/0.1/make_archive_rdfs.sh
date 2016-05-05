@@ -11,7 +11,7 @@ grep -m1 'repositoryIdentifier\s*>' $(olacvar static/root)/identify_downloads/* 
         mv $a $g
         echo $g
     done |
-    java -jar $(olacvar batch_xslt) $(olacvar docroot)/OLAC-archive-to-LD.xsl $target
+    java -cp $(olacvar batch_xslt) BatchXslt $(olacvar docroot)/OLAC-archive-to-LD.xsl $target
 
 chmod 644 $target
 

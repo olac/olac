@@ -127,9 +127,10 @@ EOF
     echo
     echo "Creating RDF description of each item..."
     echo
-    rm -f $(olacvar static_records/dir)/rdf.zip
-    find $(olacvar static_records/dir) -name "*.xml" | java -jar $(olacvar batch_xslt) $(olacvar docroot)/OLAC-item-to-LD.xsl $(olacvar static_records/dir)/rdf.zip >/dev/null
-    chmod 644 $(olacvar static_records/dir)/rdf.zip
+    base=$(olacvar static_records/dir)
+    rm -f $base/rdf.zip
+    java -cp $(olacvar batch_xslt) BatchXslt2 $(olacvar docroot)/OLAC-item-to-LD.xsl $base $base/rdf.zip >/dev/null
+    chmod 644 $base/rdf.zip
 
     echo
     echo "Creating RDF description of each archive..."

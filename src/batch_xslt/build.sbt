@@ -5,4 +5,3 @@ lazy val root = (project in file(".")).
     scalaVersion := "2.11.7",
     libraryDependencies += "net.sf.saxon" % "Saxon-HE" % "9.7.0-1"
   )
-
