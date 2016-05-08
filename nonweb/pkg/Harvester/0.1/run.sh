@@ -138,6 +138,11 @@ EOF
     $(dirname $(olacvar harvester/main))/make_archive_rdfs.sh
 
     echo
+    echo "Creating concatenated and compressed RDFs for datahub..."
+    echo
+    $(dirname $(olacvar harvester/main))/make_datahub_rdf.sh
+
+    echo
     echo "Creating static HTML pages..."
     echo
     $PYTHON $(olacvar static/generator) >/dev/null
