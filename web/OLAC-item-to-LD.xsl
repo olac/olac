@@ -88,7 +88,7 @@
                 </xsl:when>
                 <xsl:when test="@xsi:type = 'olac:language'">
                     <xsl:attribute name="rdf:resource">
-                        <xsl:value-of select="concat('http://www.lexvo.org/id/iso639-3/',@olac:code)"/>
+                        <xsl:value-of select="concat('http://lexvo.org/id/iso639-3/',@olac:code)"/>
                     </xsl:attribute>
                 </xsl:when>
                 <xsl:when test="@xsi:type = 'olac:linguistic-field'">
