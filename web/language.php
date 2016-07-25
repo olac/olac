@@ -238,7 +238,7 @@ $search_terms = implode(", ", $arr);
 </table>
 
 <p>ISO 639-3:
-<a href="http://www.sil.org/iso639-3/documentation.asp?id=<?=$langcode?>">
+<a href="http://www-01.sil.org/iso639-3/documentation.asp?id=<?=$langcode?>">
 <?=$langcode?></a>
 </p>
 
