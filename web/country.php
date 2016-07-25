@@ -125,7 +125,7 @@ foreach ($tab as $row) {
     echo "</ul></td><td><ul>";
   #$a = preg_split('#\s*,\s*#', $row['LangName']);
   #$langname = rtrim("$a[1] $a[0]");
-  $langname = $row['LangName'];
+  $langname = $row['LangName'] . ' [' . $row['LangID'] . ']';
   echo "<li>";
   echo "<a href=\"/language/$row[LangID]\">$langname</a> ($row[c])";
   echo "</li>";
