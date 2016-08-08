@@ -90,9 +90,15 @@ def process_report(con, report):
     fromdate = datetime.datetime(*time.strptime(arr[0], "%Y%m%d")[:6])
     todate = datetime.datetime(*time.strptime(arr[1], "%Y%m%d")[:6])
 
-    while not f.readline().startswith("Destination Page,"): pass
+    while ",Pageviews," not in f.readline(): pass
 
-    csvfile = csv.reader(f)
+    L = []
+    line = f.readline()
+    while line and not line.startswith(","):
+        L.append(line)
+        line = f.readline()
+
+    csvfile = csv.reader(L)
 
     for arr in csvfile:
         if len(arr) == 0 or arr[0] == '' or arr[0].startswith('#'): continue
