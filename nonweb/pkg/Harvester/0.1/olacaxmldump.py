@@ -13,26 +13,13 @@ Takes 3 arguments:
     3. directory to store the static pages (any xml files (files with
     .xml extension) and empty directories are removed before the main
     routine begins)
-
-It takes about 5-7 minutes to complete the task on a P4 2GHz machine
-with the OLAC database connected with gigabit ethernet. It will get slower
-if an NFS filesystem is used to store the static pages.
-
-To alleviate the burden of the MySQL server, the OLAC MySQL database is
-copied into a sqlite database and after that only the sqlite database is
-used to produce XML files. To copy MySQL database, mysqldump is used,
-and this turned out to be very quick, therefore making the server less busy.
-
-This program replaces both old olacaxmldump.py and gensrec.py.  The old
-olacaxmldump.py queried OLACA to get ListRecords response and used
-gensrec.py to generate static pages.
 """
 
 import os
 import time
 import gzip
 import codecs
-import sqlite3.dbapi2 as sqlite
+import MySQLdb
 from xml.dom.minidom import getDOMImplementation
 from subprocess import Popen, PIPE
 try:
@@ -132,6 +119,7 @@ Usage: %(prog)s [options] dumpfile static_pages_dir
 
     global myopts, lrfile, spdir, schema
 
+    myopts = {"use_unicode":True, "charset":"utf8"}
     if op.get('-c'):
         myopts['read_defaults_file'] = op.getOne('-c')
     elif olac:
@@ -187,38 +175,6 @@ def get_dctag_map():
         "language", "relation", "coverage", "rights"
         ])
 
-
-def create_db():
-    cmd = ["mysqldump", "--no-create-info", "--compact",
-           "--extended-insert=FALSE", "--quote-name=FALSE",
-           "--complete-insert"]
-    if 'read_default_file' in myopts:
-        cmd.append('--defaults-file="%s"' % myopts['read_defaults_file'])
-    if 'host' in myopts:
-        cmd.append('-h')
-        cmd.append(myopts['host'])
-    if 'user' in myopts:
-        cmd.append('-u')
-        cmd.append(myopts['user'])
-    if 'passwd' in myopts:
-        cmd.append('--password=%s' % myopts['passwd'])
-    if 'db' in myopts:
-        cmd.append(myopts['db'])
-    cmd += ['ARCHIVED_ITEM', 'ELEMENT_DEFN', 'METADATA_ELEM',
-            'SCHEMA_VERSION', 'CODE_DEFN', 'EXTENSION', 'OLAC_ARCHIVE']
-
-    mysql = Popen(cmd, stdout=PIPE)
-    sqlite = Popen(['sqlite3', db], stdin=PIPE)
-    sqlite.stdin.write(".read %s\n" % schema)
-    sqlite.stdin.write("BEGIN TRANSACTION;\n")
-    for l in mysql.stdout:
-        l = l.replace(r"\'","''").replace(r'\"','"').replace(r"\n","\n").replace(r"\r","\r")
-        sqlite.stdin.write(l)
-    sqlite.stdin.write("COMMIT TRANSACTION;\n")
-    sqlite.stdin.write(".quit\n")
-    sqlite.stdin.close()
-    sqlite.wait()
-
 def init():
     global doc, conn, csr, csr2, extdb, dctags
 
@@ -240,18 +196,12 @@ def init():
     doc = impl.createDocument(None,None,None)
 
     # initialize database
-    create_db()
-    conn = sqlite.connect(db)
+    conn = MySQLdb.connect(**myopts)
     csr = conn.cursor()
     csr2 = conn.cursor()
 
-    try:
-        csr.execute('drop table t')
-    except sqlite.OperationalError:
-        pass
-    
     init_sqls = [
-        'create table t (tag,lang,content,extid,code,extlabel,codelabel,itemid)',
+        'create temporary table t (tag varchar(255),lang varchar(255),content text,extid int,code varchar(255),extlabel varchar(50),codelabel varchar(255),itemid int)',
         'create index t_idx on t (itemid)',
         """
         insert into t
@@ -347,7 +297,7 @@ def get_record_container(row):
     txt = doc.createTextNode(oaiid)
     i.appendChild(txt)
     d = doc.createElement("datestamp")
-    txt = doc.createTextNode(dstamp)
+    txt = doc.createTextNode("%s" % dstamp)
     d.appendChild(txt)
     m = doc.createElement("metadata")
 
@@ -386,7 +336,7 @@ def main():
     while row:
         r, m = get_record_container(row)
         olac = get_olac_container()
-        sql = "select * from t where itemid=?"
+        sql = "select * from t where itemid=%s"
         csr2.execute(sql, (row[2],))
         nsinfo = dict(nsinfo0)
         for mdata in csr2.fetchall():
@@ -417,7 +367,10 @@ def main():
         row = csr.fetchone()
 
     print >>lrout, lrfooter
+
+    csr2.close()
+    csr.close()
+    conn.close()
     
 main()
-os.unlink(db)
 
