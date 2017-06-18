@@ -18,6 +18,7 @@ Takes 3 arguments:
 import os
 import time
 import gzip
+import zipfile
 import codecs
 import MySQLdb
 from xml.dom.minidom import getDOMImplementation
@@ -39,7 +40,7 @@ extdb = None    # extension db
 dctags = None # dc tag map
 myopts = {}     # mysql connection info
 lrfile = None   # path for ListRecords.gz
-spdir = None    # dir for static pages
+xmlzip = None   # output zip archive to store individual xmls
 
 
 
@@ -82,7 +83,7 @@ http://olac.svn.sourceforge.net/viewvc/*checkout*/web/lib/python/optionparser.py
         sys.exit(1)
 
     usageString = """\
-Usage: %(prog)s [options] dumpfile static_pages_dir
+Usage: %(prog)s [options] dumpfile zipfile
 
     options:
 
@@ -117,11 +118,11 @@ Usage: %(prog)s [options] dumpfile static_pages_dir
     if op.get('-h'): usage()
     if len(op.args) != 2: usage("invalid number of arguments")
 
-    global myopts, lrfile, spdir, schema
+    global myopts, lrfile, xmlzip, schema
 
     myopts = {"use_unicode":True, "charset":"utf8"}
     if op.get('-c'):
-        myopts['read_defaults_file'] = op.getOne('-c')
+        myopts['read_default_file'] = op.getOne('-c')
     elif olac:
         myopts['host'] = olac.olacvar('mysql/host')
         myopts['db'] = olac.olacvar('mysql/olacdb')
@@ -138,22 +139,16 @@ Usage: %(prog)s [options] dumpfile static_pages_dir
     if schema is None or not os.path.exists(schema):
         usage("can't find sliqte OLAC schema")
         
-    lrfile, spdir = op.args
+    lrfile, xmlzip = op.args
     lrdir = os.path.dirname(lrfile)
     if not os.path.exists(lrdir):
         usage("directory %s doesn't exist" % `lrdir`)
-    if not os.path.exists(spdir):
-        usage("directory %s doesn't exist" % `spdir`)
     if os.path.exists(lrfile):
         if not os.path.isfile(lrfile):
             usage("%s is not a file" % `lrfile`)
         elif not os.access(lrfile, os.W_OK):
             usage("file %s is not writable" % `lrfile`)
     elif not os.access(lrdir, os.W_OK):
-        usage("directory %s is not writable" % `lrdir`)
-    if not os.path.isdir(spdir):
-        usage("%s is not a directory" % `spdir`)
-    elif not os.access(spdir, os.W_OK):
         usage("directory %s is not writable" % `lrdir`)
     
 def get_extension_db():
@@ -181,16 +176,6 @@ def init():
     # get mysql options file, ListRecords dir, static pages dir
     process_cmdline_options()
 
-    # cleanup the static pages dir
-    for root, dirs, files in os.walk(spdir,False):
-        for f in files:
-            if f.endswith('.xml'):
-                os.unlink(os.path.join(root,f))
-        for d in dirs:
-            dr = os.path.join(root,d)
-            if len(os.listdir(dr)) == 0:
-                os.rmdir(dr)
-    
     # get dom doc
     impl = getDOMImplementation()
     doc = impl.createDocument(None,None,None)
@@ -331,6 +316,9 @@ def main():
     order by Item_ID
     """
 
+    zip_tmp = xmlzip + ".tmp"
+    zip_file = zipfile.ZipFile(zip_tmp, "w", zipfile.ZIP_DEFLATED, True)
+    
     csr.execute(sql)
     row = csr.fetchone()
     while row:
@@ -355,18 +343,13 @@ def main():
         print >>lrout, s
 
         oaiid = row[0].strip()
-        path = os.path.join(spdir,oaiid) + ".xml"
-        if '/' in oaiid:
-            d = os.path.dirname(path)
-            if not os.path.exists(d):
-                os.makedirs(d)
-        olacout = utf8writer(file(utf8encoder(path)[0],"w"))
-        olacout.write(recheader)
-        olacout.write(s)
+        zip_file.writestr(oaiid, recheader + s)
 
         row = csr.fetchone()
 
     print >>lrout, lrfooter
+
+    zip_file.close()
 
     csr2.close()
     csr.close()

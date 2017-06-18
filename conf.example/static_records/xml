@@ -1,0 +1,2 @@
+# desc: Location of zip file storing XML records 
+${docroot}/static-records/xml.zip

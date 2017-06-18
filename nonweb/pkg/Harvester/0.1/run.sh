@@ -105,7 +105,8 @@ if [ ${new_records:-0} -gt 0 -o "$1" = "MONTHLY" -o -f "$(olacvar dirty)" ]; the
     echo "Creating an XML dump and static record pages..."
     echo
     dumpnam=$XMLDUMPDIR/ListRecords-`date +%Y%m%d`.xml.gz
-    $PYTHON $(olacvar xmldump) $dumpnam $SRECDIR 2>/dev/null
+    $PYTHON $(olacvar xmldump) $dumpnam $(olacvar static_records/xml).tmp 2>/dev/null
+    mv $(olacvar static_records/xml).tmp $(olacvar static_records/xml)
     ln -sf $dumpnam $XMLDUMPDIR/ListRecords.xml.gz
     find $XMLDUMPDIR -name "ListRecords-*.xml.gz" | sort -r | sed -n '29,$p' | xargs -Ix rm -v x
     cat > $SRECDIR/index.html <<EOF
@@ -116,9 +117,8 @@ if [ ${new_records:-0} -gt 0 -o "$1" = "MONTHLY" -o -f "$(olacvar dirty)" ]; the
 </head>
 <body>
 EOF
-    find $SRECDIR -name "*.xml" | sort | \
-    sed -e 's@^'$SRECDIR'/@@' -e 's@\(.*\).xml@<li><a href="./&">\1</a></li>@' \
-        >> $SRECDIR/index.html
+    zipinfo -1 $(olacvar static_records/xml) | sort | \
+    sed -e 's@.*@<li><a href="&">&</a></li>@' >> $SRECDIR/index.html
     cat >> $SRECDIR/index.html <<EOF
 </body>
 </html>
