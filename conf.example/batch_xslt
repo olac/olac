@@ -1,2 +1,2 @@
 # desc: Batch XSLT processor
-BatchXslt!batch-xslt-assembly-1.0.jar
+BatchXslt!bin/batch-xslt2
