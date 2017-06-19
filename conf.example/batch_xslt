@@ -1,2 +1,2 @@
-# desc: Batch XSLT processor
-BatchXslt!bin/batch-xslt2
+# desc: Directory contaiing batch XSLT processors
+BatchXslt!bin
