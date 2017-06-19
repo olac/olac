@@ -118,7 +118,7 @@ if [ ${new_records:-0} -gt 0 -o "$1" = "MONTHLY" -o -f "$(olacvar dirty)" ]; the
 <body>
 EOF
     zipinfo -1 $(olacvar static_records/xml) | sort | \
-    sed -e 's@.*@<li><a href="&">&</a></li>@' >> $SRECDIR/index.html
+    sed -e 's@.*@<li><a href="./&">&</a></li>@' >> $SRECDIR/index.html
     cat >> $SRECDIR/index.html <<EOF
 </body>
 </html>
