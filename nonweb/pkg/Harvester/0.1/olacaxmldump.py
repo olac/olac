@@ -186,7 +186,10 @@ def init():
     csr2 = conn.cursor()
 
     init_sqls = [
-        'create temporary table t (tag varchar(255),lang varchar(255),content text,extid int,code varchar(255),extlabel varchar(50),codelabel varchar(255),itemid int)',
+        """
+        create temporary table t (tag varchar(255),lang varchar(255),content text,extid int,code varchar(255),extlabel varchar(50),codelabel varchar(255),itemid int)
+        character set 'utf8'
+        """,
         'create index t_idx on t (itemid)',
         """
         insert into t
@@ -299,7 +302,6 @@ def get_record_container(row):
 def main():
     init()
 
-    utf8encoder = codecs.getencoder('utf-8')
     utf8writer = codecs.getwriter('utf-8')
     lrout = utf8writer(gzip.open(lrfile,"w"))
     nsinfo0 = {
@@ -316,8 +318,7 @@ def main():
     order by Item_ID
     """
 
-    zip_tmp = xmlzip + ".tmp"
-    zip_file = zipfile.ZipFile(zip_tmp, "w", zipfile.ZIP_DEFLATED, True)
+    zip_file = zipfile.ZipFile(xmlzip, "w", zipfile.ZIP_DEFLATED, True)
     
     csr.execute(sql)
     row = csr.fetchone()
@@ -343,7 +344,7 @@ def main():
         print >>lrout, s
 
         oaiid = row[0].strip()
-        zip_file.writestr(oaiid, recheader + s)
+        zip_file.writestr(oaiid, (recheader + s).encode('utf-8'))
 
         row = csr.fetchone()
 
