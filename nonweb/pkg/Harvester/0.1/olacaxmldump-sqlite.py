@@ -30,7 +30,7 @@ except ImportError:
 
 
 
-db = "/tmp/olacaxmldump-%s" % os.getpid() # sqlite database
+db = "/data/olacaxmldump-%s" % os.getpid() # sqlite database
 doc = None      # dom document; initialized by init()
 schema = None   # OLAC database schema for SQLite
 conn = None     # db connection
