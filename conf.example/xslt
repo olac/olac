@@ -1,2 +1,2 @@
 # desc: An XSLT.
-XML!xalan
+XML!xsltproc

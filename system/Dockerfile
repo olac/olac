@@ -37,6 +37,8 @@ COPY python/*.py /usr/lib/python2.7/site-packages/olac/
 COPY PyMeld.py /usr/lib/python2.7/site-packages
 COPY optionparser.py /usr/lib/python2.7/site-packages/
 COPY olac.php /usr/share/pear/
+COPY xercesImpl.jar /usr/share/java/
+COPY xercesSamples.jar /usr/share/doc/libxerces2-java-doc/examples/
 
 ENTRYPOINT ["/olac/system/start.sh"]
 
