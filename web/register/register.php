@@ -1230,8 +1230,10 @@ $DB = new OLACDB();
 if ($_POST["action"] == "VALIDATE" && $POSTEDURL) {
   # User entered an URL and clicked on the VALIDATE button.
 
-  if (substr($POSTEDURL, 0, 7) != 'http://') {
-    $POSTEDURL = "http://$POSTEDURL";
+  $scheme_http = substr($POSTEDURL, 0, 7);
+  $scheme_https = substr($POSTEDURL, 0, 8);
+  if ($scheme_http != 'http://' && $scheme_https != 'https://') {
+    error("Only http and https are allows.");
   }
   $URLTOFILE = 'tmp/'.myurlencode($POSTEDURL);
   exec("rm -f \"$URLTOFILE\"*");
