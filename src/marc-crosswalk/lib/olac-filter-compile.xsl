@@ -109,7 +109,9 @@
       <xsl:comment> Retain everything that remains </xsl:comment><xsl:text>&#10;   </xsl:text>
       <alias:template match="*" priority="0">
          <xsl:if test="$mode = 'retain'">
-            <alias:copy-of select="@* | *"/>
+            <alias:copy>
+                <alias:copy-of select="@* | *"/>
+            </alias:copy>
          </xsl:if>
       </alias:template>
    </xsl:template>
