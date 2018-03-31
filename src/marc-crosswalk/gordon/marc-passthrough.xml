@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?oxygen RNGSchema="file:../lib/marc-filter.rnc" type="compact"?>
+
+<marc-filter>
+   <header xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <dc:title>A MARC passthrough filter</dc:title>
+      <dc:contributor>Gary Simons</dc:contributor>
+      <dc:date>2018-03-30</dc:date>
+      <dc:description>This filter simply passes through every record.</dc:description>
+   </header>
+   <reject-rules></reject-rules>
+   <retain-rules>
+      <retain-all/>
+   </retain-rules>
+</marc-filter>
