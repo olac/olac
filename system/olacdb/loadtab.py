@@ -80,6 +80,7 @@ for line in codecs.getreader(enc)(sys.stdin):
         cur.execute(sql, a)
         cnt += 1
     except MySQLdb.Error, e:
+        print cnt
         print >>sys.stderr, "%d, %s" % e.args
         print a
 print "inserted %d rows" % cnt
