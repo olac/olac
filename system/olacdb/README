@@ -11,7 +11,7 @@ http://www.ethnolotue.com and http://www.sil.org. They are also
 available from the OLAC SVN repository.
 
   $ sed 1d LanguageCodes.tab | \
-	python loadtab.py -c ~/.my.cnf -t LanguageCodes -e latin-1
+	python loadtab.py -c ~/.my.cnf -t LanguageCodes
   $ sed 1d CountryCodes.tab | \
 	python loadtab.py -c ~/.my.cnf -t CountryCodes -e latin-1
   $ sed 1d LanguageIndex.tab | \
