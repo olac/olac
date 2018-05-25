@@ -50,4 +50,4 @@
   </xs:simpleType>
 
 </xs:schema>
-
+<!--#include virtual="/schemas/xmls/qdc/2008/02/11/dcmitype.xsd" -->
