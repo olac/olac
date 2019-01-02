@@ -15,6 +15,5 @@ grep -m1 'repositoryIdentifier\s*>' $(olacvar static/root)/identify_downloads/* 
 
 chmod 644 $target
 
-rm -rf $(olacvar static/root)/identify_downloads
-
+find "$(olacvar static/root)/identify_downloads" -mindepth 1 -delete
 
