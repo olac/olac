@@ -7,6 +7,9 @@ import re
 
 __all__ = ["Harvester"]
 
+class MyOpener(urllib.FancyURLopener):
+    version = "curl/7.63.0"
+
 class Writer:
     def __init__(self, fobj):
         self.output = fobj
@@ -63,7 +66,7 @@ class Harvester:
             if self.cb_before_dl:
                 self.cb_before_dl(url)
                 
-            fobj = urllib.urlopen(url)
+            fobj = MyOpener().open(url)
             data = fobj.read()
             record_count, resumption_token = self.out.write(data)
             
