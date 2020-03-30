@@ -146,6 +146,7 @@ EOF
     echo "Creating static HTML pages..."
     echo
     $PYTHON $(olacvar static/generator) >/dev/null
+    $PYTHON $(olacvar static/cleaner) >/dev/null
 
     rm -f "$(olacvar dirty)"
 

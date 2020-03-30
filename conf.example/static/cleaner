@@ -1,0 +1,2 @@
+# desc: A script that removes static files linked to non-existing archive
+Harvester!cleanup_static.py
