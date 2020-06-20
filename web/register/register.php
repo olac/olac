@@ -23,6 +23,7 @@ define('SR_STRON',      'scripts-1.1/olac-static-repository.xsl');
 define('VERSION_STRON', 'scripts-1.1/olac-version.xsl');
 define('XERCESJ',       olacvar('xml_validator'));
 define('XSLT',          olacvar('xslt'));
+define('CURL',          olacvar('curl'));
 define('CGISTRON',      OLAC_URL.'/cgi-bin/schematron.cgi');
 define('PENDING_DIR',   $docroot . olacvar('registration/upload_area'));
                         # dir for pending hostless repos
@@ -46,7 +47,7 @@ function myflush() {
 
 
 function get_data($file, $url) {
-  system("curl -s -k -L -H 'Accept-Encoding: identity' -o '$file' '$url'", $retval);
+  system(CURL." -s -k -L -H 'Accept-Encoding: identity' -o '$file' '$url'", $retval);
   if ($retval == 23) {
     error("Download failed due to a system error: write error");
     return 0;
@@ -59,7 +60,7 @@ function get_data($file, $url) {
 
 function get_some_data($url, $n, &$data) {
   $n = intval($n);
-  exec("curl -s -k -L -H 'Accept-Encoding: identity' -r 0-$n '$url'", $arr, $retval);
+  exec(CURL." -s -k -L -H 'Accept-Encoding: identity' -r 0-$n '$url'", $arr, $retval);
   if ($retval == 23) {
     error("Download failed due to a system error: no space left");
     return FALSE;
