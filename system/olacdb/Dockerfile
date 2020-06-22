@@ -1,12 +1,17 @@
-FROM haepal/olac:db-base-1 AS stage1
+FROM alpine:3.11.3
 
-USER mysql
-
+ADD init.sh /
 ADD olac_schema.sql /
+RUN chmod 755 /init.sh
 
-RUN ( echo "use olac;"; cat /olac_schema.sql; ) | \
-    mysqld --user=mysql --datadir=/db --bootstrap
+RUN apk --update add mariadb && rm -rf /var/cache/apk/*
 
 VOLUME /db
 
-ENTRYPOINT ["mysqld", "--datadir=/db", "--skip-networking=false"]
+RUN mkdir /run/mysqld && chown mysql.mysql /run/mysqld /db
+
+# When running mysqld with existing database:
+# ENTRYPOINT ["mysqld", "--user=mysql", "--datadir=/db", "--skip-networking=false"]
+
+# When initializing a new database:
+# ENTRYPOINT ["/init.sh", "/olac_schema.sql"]
