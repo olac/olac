@@ -37,5 +37,5 @@ COPY system/xercesSamples.jar /usr/share/doc/libxerces2-java-doc/examples/
 
 VOLUME /olac/web/data
 
-ENTRYPOINT ["http", "-D", "FOREGROUND"]
+ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
 
