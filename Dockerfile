@@ -36,6 +36,8 @@ COPY system/xercesImpl.jar /usr/share/java/
 COPY system/xercesSamples.jar /usr/share/doc/libxerces2-java-doc/examples/
 COPY system/olac-vhost.conf /olac/system/
 
+RUN mkdir /olac/web/register/tmp && chown apache /olac/web/register/tmp
+
 VOLUME /olac/web/data
 
 ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
