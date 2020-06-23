@@ -34,6 +34,7 @@ COPY system/optionparser.py /usr/lib/python2.7/site-packages/
 COPY system/olac.php /usr/share/pear/
 COPY system/xercesImpl.jar /usr/share/java/
 COPY system/xercesSamples.jar /usr/share/doc/libxerces2-java-doc/examples/
+COPY system/olac-vhost.conf /olac/system/
 
 VOLUME /olac/web/data
 

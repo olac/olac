@@ -17,7 +17,7 @@ spec:
                       - name: olacdb
                         mountPath: /db
                 - name: olacweb
-                  image: haepal/olac:web-2
+                  image: haepal/olac:web-3
                   volumeMounts:
                       - name: olacdata
                         mountPath: /olac/web/data
