@@ -1,0 +1,2 @@
+# desc: Location of zip file storing XML records 
+${static_records/dir}/xml.zip

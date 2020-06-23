@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
     name: olac
 spec:
-    template:
+    template:    
         metadata:
             name: olac
             labels:
@@ -16,6 +16,12 @@ spec:
                   volumeMounts:
                       - name: olacdb
                         mountPath: /db
+                - name: dir-builder
+                  image: alpine
+                  command: ['mkdir', '/d/static', '/d/static-records', '/d/xmldump']
+                  volumeMounts:
+                      - name: olacdata
+                        mountPath: /d
             containers:
                 - name: olacdb
                   image: haepal/olac:db-3
@@ -23,10 +29,18 @@ spec:
                   volumeMounts:
                       - name: olacdb
                         mountPath: /db
+                - name: olacweb
+                  image: haepal/olac:web-1
+                  volumeMounts:
+                      - name: olacdata
+                        mountPath: /olac/web/data
             volumes:
                 - name: olacdb
                   persistentVolumeClaim:
                       claimName: olacdb-pvc
+                - name: olacdata
+                  persistentVolumeClaim:
+                      claimName: olacdata-pvc
     selector:
         matchLabels:
             app: olac

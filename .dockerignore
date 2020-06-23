@@ -1,0 +1,9 @@
+conf.example
+docs
+k8s
+src
+wiki
+web/static
+web/static-records
+web/xmldump
+.*

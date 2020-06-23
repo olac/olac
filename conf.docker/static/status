@@ -1,0 +1,2 @@
+# desc: Location of the file logging the status of static file creation.
+${static/root}/status.txt
