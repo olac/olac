@@ -75,6 +75,8 @@ def str2sec(s):
     """
     @param s: a string of HH:MM:SS form
     """
+    if s.startswith('<'):
+        s = s[1:]
     a = s.split(':')
     return int(a[0]) * 3600 + int(a[1]) * 60 + int(a[2])
 
