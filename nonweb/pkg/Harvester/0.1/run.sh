@@ -21,7 +21,7 @@ HARVEST_LOG=harvest_log.txt
 # mysql
 MYSQL="mysql -h $(olacvar mysql/host) -u $(olacvar mysql/user) -p$(olacvar mysql/passwd) $(olacvar mysql/olacdb)"
 
-PYTHON=python
+PYTHON=$(olacvar python/harvester)
 
 # admin email address
 ADMIN_EMAIL="olac-admin@language-archives.org $(olacvar tech_email)"
