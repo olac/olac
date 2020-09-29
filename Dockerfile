@@ -25,6 +25,7 @@ RUN mkdir /run/apache2 && \
 
 COPY web /olac/web
 COPY nonweb /olac/nonweb
+COPY data /olac/data
 COPY conf.docker /olac/conf
 COPY system/olacbase /etc/
 COPY system/olacvar system/olacvarlist /bin/
