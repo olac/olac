@@ -35,10 +35,11 @@ COPY system/olac.php /usr/share/pear/
 COPY system/xercesImpl.jar /usr/share/java/
 COPY system/xercesSamples.jar /usr/share/doc/libxerces2-java-doc/examples/
 COPY system/olac-vhost.conf /olac/system/
+COPY system/start.sh /olac/
 
 RUN mkdir /olac/web/register/tmp && chown apache /olac/web/register/tmp
 
 VOLUME /olac/web/data
 
-ENTRYPOINT ["httpd", "-D", "FOREGROUND"]
+ENTRYPOINT ["start.sh"]
 
