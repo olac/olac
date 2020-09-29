@@ -23,7 +23,7 @@ function get_rdf($item) {
 }
 
 function get_html($item) {
-    $filename = "static/archive/$item.html";
+    $filename = olacvar("static/root") . "/archive/$item.html";
     if (file_exists($filename)) {
         return file_get_contents($filename);
     } else {
