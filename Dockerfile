@@ -10,6 +10,7 @@ RUN apk --update add \
     perl perl-libwww perl-dbi perl-xml-parser perl-dbd-mysql \
     openjdk8-jre \
     unzip \
+    bash \
     make sqlite && \
     rm -f /var/cache/apk/*
 
@@ -39,9 +40,7 @@ COPY system/xercesSamples.jar /usr/share/doc/libxerces2-java-doc/examples/
 COPY system/olac-vhost.conf /olac/system/
 COPY system/start.sh /olac/
 
-RUN mkdir /olac/web/register/tmp && \
-    mkdir /olac/web/xmldump && \
-    chown apache /olac/web/register/tmp
+RUN mkdir /olac/web/register/tmp && chown apache /olac/web/register/tmp
 
 VOLUME /olac/web/data
 
