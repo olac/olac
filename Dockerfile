@@ -41,5 +41,5 @@ RUN mkdir /olac/web/register/tmp && chown apache /olac/web/register/tmp
 
 VOLUME /olac/web/data
 
-ENTRYPOINT ["start.sh"]
+ENTRYPOINT ["/olac/start.sh"]
 
