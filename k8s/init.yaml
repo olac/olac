@@ -12,7 +12,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: olacdb-builder
-          image: haepal/olac:db-4
+          image: haepal/olac:db-5
           command: ['/init.sh', '/olac_schema.sql']
           volumeMounts:
             - name: olacdb

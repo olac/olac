@@ -11,13 +11,13 @@ spec:
         spec:
             containers:
                 - name: olacdb
-                  image: haepal/olac:db-4
+                  image: haepal/olac:db-5
                   command: ['mysqld', '--user=mysql', '--datadir=/db', '--skip-networking=false']
                   volumeMounts:
                       - name: olacdb
                         mountPath: /db
                 - name: olacweb
-                  image: haepal/olac:web-13
+                  image: haepal/olac:web-15
                   volumeMounts:
                       - name: olacdata
                         mountPath: /olac/web/data
