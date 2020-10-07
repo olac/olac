@@ -129,7 +129,7 @@ EOF
     echo
     base=$(olacvar static_records/dir)
     rm -f $base/rdf.zip
-    $(olacvar batch_xslt)/batch-xslt2 -J-Xmx600m -- $(olacvar docroot)/OLAC-item-to-LD.xsl $base/xml.zip $base/rdf.zip >/dev/null
+    $(olacvar batch_xslt)/batch-xslt2 -J-Xmx700m -- $(olacvar docroot)/OLAC-item-to-LD.xsl $base/xml.zip $base/rdf.zip >/dev/null
     chmod 644 $base/rdf.zip
 
     echo
