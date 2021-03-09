@@ -2,7 +2,7 @@
 
 MYSQL=mysql
 
-PYTHON=python
+PYTHON=$(olacvar python/harvester)
 
 TMP_LOG=/tmp/harvest.log-$$
 
