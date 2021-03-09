@@ -67,7 +67,7 @@ cat $FIFO | $LOGGER &
 exec 1>$FIFO 2>&1
 
 new_records=`grep -e "updated records:" -e "new records:" $TMP_LOG | awk '{sum+=$5} END {print sum}'`
-[ ${new_records:-0} -gt 0 ] && touch $(olacvar dirty)
+[ ${new_records:-0} -gt 0 ] && touch $(olacvar dirty) && chmod g+w $(olacvar dirty)
 
 rm -f $TMP_LOG
 rm -f $FIFO
