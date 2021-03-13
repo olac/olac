@@ -1,4 +1,17 @@
 #! /bin/sh
+#
+# Command line parameters:
+#
+#   $1 -- olac schema file
+#
+# Environment variables:
+#
+#   HOSTNAME
+#   OLAC_MYSQL_DB
+#   OLAC_MYSQL_DB2
+#   OLAC_MYSQL_USER
+#   OLAC_MYSQL_PASSWORD
+#
 
 OLACDB_SCHEMA="$1"
 
@@ -9,13 +22,13 @@ create_db()
         mysql_install_db --user=mysql --datadir=/db
         (
             echo "create database $db;"
-            echo "grant all on $db.* to 'olac'@'%' identified by 'olac123';"
+            echo "grant all on $db.* to '$OLAC_MYSQL_USER'@'$HOSTNAME' identified by '$OLAC_MYSQL_PASSWORD';"
             echo "use $db;"
             cat "$OLACDB_SCHEMA"
         ) | mysqld --user=mysql --datadir=/db --bootstrap --skip-grant-tables=off
     fi
 }
 
-create_db olac
-create_db olac2
+create_db $OLAC_MYSQL_DB
+create_db $OLAC_MYSQL_DB2
 
