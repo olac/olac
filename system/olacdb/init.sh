@@ -22,6 +22,7 @@ create_db()
         (
             echo "create database $db;"
             echo "grant all on $db.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';"
+            echo "flush privileges;"
             echo "use $db;"
             cat "$OLACDB_SCHEMA"
         ) | mysqld --user=mysql --datadir=/db --bootstrap --skip-grant-tables=off
