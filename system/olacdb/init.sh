@@ -19,13 +19,13 @@ create_db()
     db=$1
     if ! test -d /db/$db; then
         mysql_install_db --user=mysql --datadir=/db
-        (
+        {
             echo "create database $db;"
             echo "grant all on $db.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';"
             echo "flush privileges;"
             echo "use $db;"
             cat "$OLACDB_SCHEMA"
-        ) | mysqld --user=mysql --datadir=/db --bootstrap --skip-grant-tables=off
+        } | mysqld_safe --user=mysql --datadir=/db --bootstrap --skip-grant-tables=off
     fi
 }
 
