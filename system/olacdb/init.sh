@@ -6,7 +6,6 @@
 #
 # Environment variables:
 #
-#   HOSTNAME
 #   OLAC_MYSQL_DB
 #   OLAC_MYSQL_DB2
 #   OLAC_MYSQL_USER
@@ -22,7 +21,7 @@ create_db()
         mysql_install_db --user=mysql --datadir=/db
         (
             echo "create database $db;"
-            echo "grant all on $db.* to '$OLAC_MYSQL_USER'@'$HOSTNAME' identified by '$OLAC_MYSQL_PASSWORD';"
+            echo "grant all on $db.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';"
             echo "use $db;"
             cat "$OLACDB_SCHEMA"
         ) | mysqld --user=mysql --datadir=/db --bootstrap --skip-grant-tables=off
