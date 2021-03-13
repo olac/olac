@@ -6,3 +6,4 @@ resources:
 - olacdata-pvc.yaml
 - olacdb-pvc.yaml
 - olac.yaml
+- olac-svc.yaml
