@@ -1,34 +1,12 @@
-#! /bin/sh
-#
-# Command line parameters:
-#
-#   $1 -- olac schema file
-#
-# Environment variables:
-#
-#   OLAC_MYSQL_DB
-#   OLAC_MYSQL_DB2
-#   OLAC_MYSQL_USER
-#   OLAC_MYSQL_PASSWORD
-#
+#! /bin/bash
 
-OLACDB_SCHEMA="$1"
-
-create_db()
-{
-    db=$1
-    if ! test -d /db/$db; then
-        mysql_install_db --user=mysql --datadir=/db
-        {
-            echo "create database $db;"
-            echo "grant all on $db.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';"
-            echo "flush privileges;"
-            echo "use $db;"
-            cat "$OLACDB_SCHEMA"
-        } | mysqld_safe --user=mysql --datadir=/db --bootstrap --skip-grant-tables=off
-    fi
-}
-
-create_db $OLAC_MYSQL_DB
-create_db $OLAC_MYSQL_DB2
-
+mysql -u root -p"$MYSQL_ROOT_PASSWORD" <<EOF
+create database $OLAC_MYSQL_DB;
+create database $OLAC_MYSQL_DB2;
+use $OLAC_MYSQL_DB;
+source /olac_schema.sql;
+use $OLAC_MYSQL_DB2;
+source /olac_schema.sql;
+grant all on olac.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';
+grant all on olac2.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';
+EOF
