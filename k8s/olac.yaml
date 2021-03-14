@@ -13,12 +13,6 @@ spec:
         app: olac
     spec:
       initContainers:
-      - name: olacdb-builder
-        image: haepal/olac:db-5
-        command: ['/init.sh', '/olac_schema.sql']
-        volumeMounts:
-          - name: olacdb
-            mountPath: /db
       - name: dir-builder
         image: alpine
         command: ['mkdir', '-p', '/d/static', '/d/static-records', '/d/xmldump']
@@ -27,17 +21,10 @@ spec:
             mountPath: /d
       containers:
       - name: olacdb
-        image: haepal/olac:db-5
-        command:
-          [
-            "mysqld",
-            "--user=mysql",
-            "--datadir=/db",
-            "--skip-networking=false",
-          ]
+        image: haepal/olac:db-10
         volumeMounts:
         - name: olacdb
-          mountPath: /db
+          mountPath: /var/lib/mysql
         resources:
           requests:
             cpu: "0.5"
@@ -45,6 +32,15 @@ spec:
           limits:
             cpu: "1"
             memory: 2Gi
+        envFrom:
+        - configMapRef:
+            name: olac-config
+          prefix: OLAC_
+        - secretRef:
+            name: olac-secret
+          prefix: OLAC_
+        - secretRef:
+            name: mysql-root
       - name: olacweb
         image: haepal/olac:web-15
         volumeMounts:
