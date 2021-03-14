@@ -9,7 +9,7 @@ RUN apk --update add \
     python py-pip py-mysqldb py-curl py-dateutil py-openssl py-cryptography py-enum34 py-cffi \
     perl perl-libwww perl-dbi perl-xml-parser perl-dbd-mysql \
     openjdk8-jre \
-    unzip \
+    unzip procps libxslt \
     bash \
     make sqlite && \
     rm -f /var/cache/apk/*

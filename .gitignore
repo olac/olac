@@ -5,3 +5,5 @@ web/static-records
 web/xmldump
 !web/static/staticrecord.xsl
 *.pyc
+.metals
+.vscode
