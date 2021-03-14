@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -6,3 +7,23 @@ data:
   MYSQL_USER: olac
   MYSQL_DB: olac
   MYSQL_DB2: olac2
+  REPO_REVIEW_USER: olac
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: olac-secret
+type: Opaque
+data:
+  MYSQL_PASSWORD: b2xhYzEyMw==
+  REPO_REVIEW_PASSWORD: b2xhYzEyMw==
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql-root
+type: Opaque
+data:
+  MYSQL_ROOT_PASSWORD: NzNxdzBEc3lQdUd5TU0=

@@ -9,4 +9,5 @@ use $OLAC_MYSQL_DB2;
 source /olac_schema.sql;
 grant all on olac.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';
 grant all on olac2.* to '$OLAC_MYSQL_USER'@'%' identified by '$OLAC_MYSQL_PASSWORD';
+insert into olac.admin_auth values ('$OLAC_REPO_REVIEW_USER', '$OLAC_REPO_REVIEW_PASSWORD')
 EOF
