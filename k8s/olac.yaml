@@ -46,7 +46,7 @@ spec:
         - secretRef:
             name: mysql-root
       - name: olacweb
-        image: haepal/olac:web-17
+        image: haepal/olac:web-18
         volumeMounts:
         - name: olacdata
           mountPath: /olac/web/data
