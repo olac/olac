@@ -12,17 +12,6 @@ spec:
       labels:
         app: olac
     spec:
-      initContainers:
-      - name: dir-builder
-        image: alpine
-        command: [
-          'mkdir', '-p', 
-          '/d/static', '/d/static-records', '/d/xmldump',
-          '/d/register/pending', '/d/register/hosted'
-          ]
-        volumeMounts:
-          - name: olacdata
-            mountPath: /d
       containers:
       - name: olacdb
         image: haepal/olac:db-11
@@ -46,7 +35,7 @@ spec:
         - secretRef:
             name: mysql-root
       - name: olacweb
-        image: haepal/olac:web-18
+        image: haepal/olac:web-19
         volumeMounts:
         - name: olacdata
           mountPath: /olac/web/data
@@ -57,6 +46,13 @@ spec:
           limits:
             cpu: "1"
             memory: 2Gi
+        envFrom:
+        - configMapRef:
+            name: olac-config
+          prefix: OLAC_
+        - secretRef:
+            name: olac-secret
+          prefix: OLAC_
       volumes:
       - name: olacdb
         persistentVolumeClaim:
