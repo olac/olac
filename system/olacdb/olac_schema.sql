@@ -836,3 +836,11 @@ Code		varchar(64) unique
 insert into DCMITypeVocabulary (Code) values ('Collection'),('Dataset'),('Event'),('Image'),('InteractiveResource'),('MovingImage'),('PhysicalObject'),('Service'),('Software'),('Sound'),('StillImage'),('Text');
 
 
+##################################################################
+# Table                : admin_auth
+# Description          : Credentials for registraion review
+##################################################################
+create table admin_auth (
+user		varchar(32) unique,
+pass		varchar(64)
+) engine=innodb, charset=utf8;
