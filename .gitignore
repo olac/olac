@@ -1,4 +1,9 @@
+conf
+web/register/tmp
 web/static
 web/static-records
 web/xmldump
 !web/static/staticrecord.xsl
+*.pyc
+.metals
+.vscode
