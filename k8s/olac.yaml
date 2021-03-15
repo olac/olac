@@ -15,7 +15,11 @@ spec:
       initContainers:
       - name: dir-builder
         image: alpine
-        command: ['mkdir', '-p', '/d/static', '/d/static-records', '/d/xmldump']
+        command: [
+          'mkdir', '-p', 
+          '/d/static', '/d/static-records', '/d/xmldump',
+          '/d/register/pending', '/d/register/hosted'
+          ]
         volumeMounts:
           - name: olacdata
             mountPath: /d
